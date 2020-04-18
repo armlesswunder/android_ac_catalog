@@ -19,13 +19,13 @@
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res;file://$MODULE_DIR$/build/generated/res/resValues/debug" />
         <option name="TEST_RES_FOLDERS_RELATIVE_PATH" value="" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
       </configuration>
     </facet>
     <facet type="kotlin-language" name="Kotlin">
-      <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false" pureKotlinSourceFolders="C:\Users\000ab\Desktop\ACCatalog\app\src\debug\kotlin;C:\Users\000ab\Desktop\ACCatalog\app\src\debug\java;C:\Users\000ab\Desktop\ACCatalog\app\src\release\kotlin;C:\Users\000ab\Desktop\ACCatalog\app\src\release\java;C:\Users\000ab\Desktop\ACCatalog\app\src\debugAndroidTest\kotlin;C:\Users\000ab\Desktop\ACCatalog\app\src\debugUnitTest\kotlin;C:\Users\000ab\Desktop\ACCatalog\app\src\releaseUnitTest\kotlin">
+      <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false" pureKotlinSourceFolders="C:\Users\000ab\Documents\android_ac_catalog\app\src\debug\kotlin;C:\Users\000ab\Documents\android_ac_catalog\app\src\debug\java;C:\Users\000ab\Documents\android_ac_catalog\app\src\release\kotlin;C:\Users\000ab\Documents\android_ac_catalog\app\src\release\java;C:\Users\000ab\Documents\android_ac_catalog\app\src\debugAndroidTest\kotlin;C:\Users\000ab\Documents\android_ac_catalog\app\src\debugUnitTest\kotlin;C:\Users\000ab\Documents\android_ac_catalog\app\src\releaseUnitTest\kotlin">
         <compilerSettings>
           <option name="additionalArguments" value="-Xallow-no-source-files" />
         </compilerSettings>
