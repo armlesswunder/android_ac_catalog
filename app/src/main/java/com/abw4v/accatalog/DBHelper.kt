@@ -61,7 +61,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         val db = this.readableDatabase
         var cursor: Cursor? = null
         try {
-            cursor = db.rawQuery("select * from $tableName;", null)
+            cursor = db.rawQuery("select * from $tableName  order by \"Index\";", null)
         }
         catch(e: SQLiteException) {
             println(e)
@@ -74,9 +74,9 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         var cursor: Cursor? = null
         try {
             if (season != "")
-                cursor = db.rawQuery("select * from $gameName$tableName where \"Index\" in (select * from $gameName$season$tableName);", null)
+                cursor = db.rawQuery("select * from $gameName$tableName where \"Index\" in (select * from $gameName$season$tableName) order by \"Index\";", null)
             else
-                cursor = db.rawQuery("select * from $gameName$tableName;", null)
+                cursor = db.rawQuery("select * from $gameName$tableName order by \"Index\";", null)
         }
         catch(e: SQLiteException) {
             println(e)

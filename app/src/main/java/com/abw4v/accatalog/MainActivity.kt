@@ -37,13 +37,13 @@ class MainActivity : AppCompatActivity() {
         var useCurrentSeason = false
         var selected = false
         var selectedFilter = false
-        var qualifier = "acnl_"
+        var qualifier = "acnh_"
         var selectedSeason = ""
-        var qualifierIndex = 3
-        var tableIndex = 10
+        var qualifierIndex = 4
+        var tableIndex = 0
         var seasonIndex = 0
         var thisSeason = 0
-        var itemType = "furniture"
+        var itemType = "accessory"
 
         lateinit var recyclerView: RecyclerView
         lateinit var viewAdapter: RecyclerView.Adapter<*>
