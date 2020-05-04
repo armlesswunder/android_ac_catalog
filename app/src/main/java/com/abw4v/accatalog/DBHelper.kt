@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 
-class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 1) {
+class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 3) {
 
     companion object {
         val DATABASE_NAME = "catalog.db"
@@ -24,14 +24,37 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
                 db.execSQL(str)
                 lineNo++
             } catch(e: SQLiteException) {
+                lineNo++
                 errNo++
+                println("Error #$errNo on line $lineNo using sql statement: $str")
             }
         }
     }
 
+    //used exclusively by developer to fix sql bugs
     fun recreate() {
 
         val db = this.writableDatabase
+        val sqlReader = SQLReader()
+        var sqlStr = sqlReader.getSQLData(context, "dev.sql")
+        var sqlArr = sqlStr?.split("\n")
+        var lineNo = 1
+        var errNo = 0
+
+        for (str in sqlArr!!) {
+            try {
+                db.execSQL(str)
+                lineNo++
+            } catch(e: SQLiteException) {
+                lineNo++
+                errNo++
+                println("Error #$errNo on line $lineNo using sql statement: $str")
+            }
+        }
+    }
+
+    fun update1(db: SQLiteDatabase) {
+
         val sqlReader = SQLReader()
         var sqlStr = sqlReader.getSQLData(context, "update1.sql")
         var sqlArr = sqlStr?.split("\n")
@@ -43,7 +66,29 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
                 db.execSQL(str)
                 lineNo++
             } catch(e: SQLiteException) {
+                lineNo++
                 errNo++
+                println("Error #$errNo on line $lineNo using sql statement: $str")
+            }
+        }
+    }
+
+    fun update2(db: SQLiteDatabase) {
+
+        val sqlReader = SQLReader()
+        var sqlStr = sqlReader.getSQLData(context, "update2.sql")
+        var sqlArr = sqlStr?.split("\n")
+        var lineNo = 1
+        var errNo = 0
+
+        for (str in sqlArr!!) {
+            try {
+                db.execSQL(str)
+                lineNo++
+            } catch(e: SQLiteException) {
+                lineNo++
+                errNo++
+                println("Error #$errNo on line $lineNo using sql statement: $str")
             }
         }
     }
@@ -51,10 +96,13 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         //execute each update.sql file depending on which version the user is updating from
         //version is defined in the constructor ^
-        /*
-        if (oldVersion < 2 && newVersion >= 2) { add version 2 updates }
-        if (oldVersion < 3 && newVersion >= 3) { add version 3 updates }
-         */
+
+        if (oldVersion < 2) {
+            update1(db)
+        }
+        if (oldVersion < 3) {
+            update2(db)
+        }
     }
 
     fun getCursorData(tableName: String): Cursor {
@@ -64,7 +112,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
             cursor = db.rawQuery("select * from $tableName  order by \"Index\";", null)
         }
         catch(e: SQLiteException) {
-            println(e)
+            println("Error getting cursor data: $e")
         }
         return cursor!!
     }
@@ -79,7 +127,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
                 cursor = db.rawQuery("select * from $gameName$tableName order by \"Index\";", null)
         }
         catch(e: SQLiteException) {
-            println(e)
+            println("Error getting cursor data: $e")
         }
         return cursor!!
     }
@@ -123,7 +171,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         val arrValues = emptyArray<String>().toMutableList()
         cursor.moveToFirst()
         do {
-
+            //display tables without underscores to user. replace them here.
             arrValues.add(cursor.getString(0).replace("_", " "))
         } while (cursor.moveToNext())
         cursor.close()
@@ -137,6 +185,6 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
 
         val db = this.writableDatabase
         val result = db.execSQL("update ${tableName} set Selected = ${value} where \"Index\" = ${index};")
-        println(result)
+        println("Successfully updated table: $tableName item number: $index set to: $value. Result: $result")
     }
 }
