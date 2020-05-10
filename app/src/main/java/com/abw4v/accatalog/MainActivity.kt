@@ -148,7 +148,7 @@ class MainActivity : AppCompatActivity() {
         tableSpinner.setSelection(tableIndex)
 
         gameSpinner.onItemSelectedListener =
-            GameSpinnerListener(this, prefs, gameSpinner, tableSpinner)
+            GameSpinnerListener(this, prefs, tableSpinner, gameSpinner)
 
         tableSpinner.onItemSelectedListener =
             TableSpinnerListener(this, db, prefs, tableSpinner)
@@ -217,7 +217,7 @@ class MainActivity : AppCompatActivity() {
         selectedFilter = prefs.getBoolean("filter", selectedFilter)
         MainActivity.selected = prefs.getBoolean("selected", MainActivity.selected)
         firstTime = prefs.getBoolean("first_time", true)
-        qualifier = prefs.getString("qualifier", qualifier) ?: "acnl_"
+        qualifier = prefs.getString("qualifier", qualifier) ?: "acnh_"
         itemType = prefs.getString("table", itemType) ?: "furniture"
         useCurrentSeason = prefs.getBoolean("use_current_date", true)
         selectedSeasonIndex = prefs.getInt("selected_season", 0)
