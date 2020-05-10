@@ -1,5 +1,5 @@
 drop table if exists acgc_furniture;
-create table acgc_furniture ("Index" int primary key, Selected int, Name varchar(255), Series varchar(63), Price varchar(15), "From" varchar(63), Color varchar(31));
+create table acgc_furniture ("Index" int primary key, Selected int, Name varchar(255), Price varchar(15), "From" varchar(63), Series varchar(63), Color varchar(31));
 insert into acgc_furniture values(1, 0, 'blue bed', '2100', 'Redd''s', 'Blue Series', 'none');
 insert into acgc_furniture values(2, 0, 'blue bench', '1900', 'Tom Nook''s Shop (Group A)', 'Blue Series', 'none');
 insert into acgc_furniture values(3, 0, 'blue bookcase', '1900', 'Tom Nook''s Shop (Group B)', 'Blue Series', 'none');
@@ -620,3 +620,14 @@ insert into acgc_wallpaper values(67, 0, 'Harvest Wall', 'unorderable', 'Frankli
 insert into acgc_carpet values(66, 0, 'Block Flooring', '?', 'Nook Password');
 insert into acgc_carpet values(67, 0, 'Boxing Ring Mat', 'unorderable', 'Saharah');
 insert into acgc_carpet values(68, 0, 'Harvest Rug', 'unorderable', 'Franklin');
+update acgc_insect set "Times" = 'April through September, 8am to 4pm' where "Index" = 3;
+insert into acgc_may_insect values (3);
+insert into acgc_jun_insect values (3);
+insert into acgc_jul_insect values (3);
+insert into acgc_aug1_insect values (3);
+insert into acgc_aug2_insect values (3);
+insert into acgc_sep1_insect values (3);
+insert into acgc_sep2_insect values (3);
+insert into acgc_shirt values(257, 0, 'Houndstooth Knit', 'orderable', '?', 'winter');
+update acgc_shirt set "Name" = 'Toad Print' where "Index" = 242;
+insert into acgc_wallpaper values(68, 0, 'Backyard Fence', 'orderable', '?');

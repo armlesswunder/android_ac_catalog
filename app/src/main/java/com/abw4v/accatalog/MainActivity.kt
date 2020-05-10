@@ -14,18 +14,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.abw4v.accatalog.MainActivity.Companion.filter
 import com.abw4v.accatalog.MainActivity.Companion.itemType
 import com.abw4v.accatalog.MainActivity.Companion.qualifier
 import com.abw4v.accatalog.MainActivity.Companion.selectedFilter
 import java.lang.ref.WeakReference
 import java.util.*
-import android.app.Activity
 import android.content.SharedPreferences
-import android.view.inputmethod.InputMethodManager
-
-//TODO
-//improve seasons selected logic
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         var qualifierIndex = 4
         var tableIndex = 0
         var seasonIndex = 0
+        var selectedSeasonIndex = 0
         var thisSeason = 0
         var itemType = "accessory"
 
@@ -62,44 +57,6 @@ class MainActivity : AppCompatActivity() {
 
         val gameValues = arrayOf("acgc_", "acww_", "accf_", "acnl_", "acnh_")
         val seasonValues = arrayOf("", "jan_", "feb_", "mar_", "apr_", "may_", "jun_", "jul_", "aug1_", "aug2_", "sep1_", "sep2_", "oct_", "nov_", "dec_")
-
-        fun filter(db: DBHelper, context: Context) {
-
-            if (selectedFilter) {
-                val sel = if (selected) "1" else "0"
-                myDataset = masterDataset.filter { element -> element["Selected"] == sel
-                }.toMutableList()
-
-                myDataset = myDataset.filter { element ->
-                    element["Name"]!!.toLowerCase().contains(name.toLowerCase())
-                }.toMutableList()
-
-
-                if (masterDataset[0].containsKey("From")) {
-                    myDataset = myDataset.filter { element ->
-                        element["From"]!!.toLowerCase().contains(from.toLowerCase())
-                    }.toMutableList()
-                }
-            }
-            else {
-
-                myDataset = masterDataset.filter { element ->
-                    element["Name"]!!.toLowerCase().contains(name.toLowerCase())
-                }.toMutableList()
-
-
-                if (masterDataset[0].containsKey("From")) {
-                    myDataset = myDataset.filter { element ->
-                        element["From"]!!.toLowerCase().contains(from.toLowerCase())
-                    }.toMutableList()
-                }
-            }
-
-            val recyclerViewState = recyclerView.layoutManager!!.onSaveInstanceState()
-            recyclerView.adapter = RecViewAdapter(myDataset, db, context)
-            recyclerView.adapter!!.notifyDataSetChanged()
-            recyclerView.layoutManager!!.onRestoreInstanceState(recyclerViewState)
-        }
     }
     lateinit var progressBar: ProgressBar
     var firstTime = false
@@ -147,96 +104,18 @@ class MainActivity : AppCompatActivity() {
         val db = DBHelper(this)
 
         findViewById<ImageView>(R.id.settingsBtn).setOnClickListener {
-
-            val alertBuilder = AlertDialog.Builder(this@MainActivity)
-
-            alertBuilder.apply {
-                val layout = LayoutInflater.from(context).inflate(R.layout.settings_alert, null)
-                setView(layout)
-                val useCurrentDateCheckBox = layout.findViewById<CheckBox>(R.id.useCurrentDate)
-                val devBtn = layout.findViewById<Button>(R.id.devBtn)
-
-                useCurrentDateCheckBox.isChecked = useCurrentSeason
-
-                devBtn.setOnClickListener {
-                    var alert: AlertDialog = showAlert(this@MainActivity, "Recreating Database. Please wait.")
-                    createAsync(db, WeakReference(this@MainActivity), alert).execute()
-                }
-                setPositiveButton("OK") { alert, _ ->
-                    prefs.edit().putBoolean("use_current_date", useCurrentDateCheckBox.isChecked).apply()
-                    useCurrentSeason = useCurrentDateCheckBox.isChecked
-                }
-            }.create().show()
+            settingsBtnPressed(db, prefs)
         }
 
         val filterBtn = findViewById<ImageView>(R.id.filterBtn)
         filterBtn.setOnClickListener {
-            val alertBuilder = AlertDialog.Builder(this)
-            alertBuilder.apply {
-                val layout = LayoutInflater.from(context).inflate(R.layout.filter_alert, null)
-                setView(layout)
-
-                val seasonLbl = layout.findViewById<TextView>(R.id.seasonLbl)
-                val filterCheckBox = layout.findViewById<CheckBox>(R.id.filter)
-                val selectedCheckBox = layout.findViewById<CheckBox>(R.id.selected)
-                val fromSearchBar = layout.findViewById<EditText>(R.id.fromSearchBar)
-                val seasonSpinner = layout.findViewById<Spinner>(R.id.seasonSpinner)
-
-                val seasonAdapter = ArrayAdapter<String>(
-                    this@MainActivity,
-                    android.R.layout.simple_spinner_item,
-                    seasonDisplay
-                )
-
-                seasonSpinner.adapter = seasonAdapter
-                seasonAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
-
-                filterCheckBox.isChecked = selectedFilter
-                selectedCheckBox.isChecked = selected
-                fromSearchBar.setText(from)
-
-                seasonSpinner.setSelection(if (useCurrentSeason) thisSeason else seasonIndex)
-
-                if (itemType == "fish" || itemType == "insect" || itemType == "seafood") {
-                    seasonSpinner.visibility = View.VISIBLE
-                    seasonLbl.visibility = View.VISIBLE
-                    seasonSpinner.setSelection(if (useCurrentSeason) thisSeason else seasonIndex)
-                } else {
-                    seasonSpinner.visibility = View.GONE
-                    seasonLbl.visibility = View.GONE
-                    seasonSpinner.setSelection(0)
-                }
-
-                setPositiveButton("OK") { alert, _ ->
-                    seasonIndex = seasonSpinner.selectedItemPosition
-                    val selectedSeason = seasonSpinner.selectedItem.toString()
-                    from = fromSearchBar.text.toString()
-                    selectedFilter = filterCheckBox.isChecked
-                    selected = selectedCheckBox.isChecked
-
-                    if (Companion.selectedSeason != selectedSeason) {
-
-                        prefs.edit().putBoolean("filter", selectedFilter).apply()
-                        prefs.edit().putBoolean("selected", selected).apply()
-                        prefs.edit().putString("qualifier", qualifier).apply()
-
-                        if (seasonIndex == 0) {
-                            myDataset = db.getData(qualifier + itemType.replace(" ", "_"))
-                            masterDataset = myDataset
-                        } else {
-                            myDataset =
-                                db.getSeasonData(qualifier, itemType.replace(" ", "_"), seasonValues[seasonIndex])
-                            masterDataset = myDataset
-                        }
-                    }
-                    filter(db, this@MainActivity)
-                    alert.dismiss()
-                }
-            }.show()
+            filterBtnPressed(db, prefs)
         }
 
-        myDataset = db.getData(qualifier + itemType.replace(" ", "_"))
-        masterDataset = myDataset
+        if(!useSeasonData()) {
+            seasonIndex = 0
+        }
+        getData(db)
 
         tableDisplayACGC = db.getTableData(gameValues[0] + "table").toTypedArray()
         tableDisplayACWW = db.getTableData(gameValues[1] + "table").toTypedArray()
@@ -246,7 +125,7 @@ class MainActivity : AppCompatActivity() {
 
         val gameSpinner = findViewById<Spinner>(R.id.gameSpinner)
         val tableSpinner = findViewById<Spinner>(R.id.tableSpinner)
-        var tableDisplay = getItemTypeDisplayTable()
+        val tableDisplay = getItemTypeDisplayTable()
 
         val gameAdapter = ArrayAdapter<String>(
             this@MainActivity,
@@ -269,75 +148,10 @@ class MainActivity : AppCompatActivity() {
         tableSpinner.setSelection(tableIndex)
 
         gameSpinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    qualifierIndex = position
-                    var tableDisplay = getItemTypeDisplayTable()
-                    val tableAdapter = ArrayAdapter<String>(
-                        this@MainActivity,
-                        R.layout.spinner_layout,
-                        tableDisplay
-                    )
-                    tableSpinner.adapter = tableAdapter
-                    tableAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
-                    if (tableIndex >= tableDisplay.size)
-                        tableIndex = 0
-
-                    qualifierIndex = gameSpinner.selectedItemPosition
-
-                    val selectedGame = gameValues[gameSpinner.selectedItemPosition]
-                    qualifier = selectedGame
-                    prefs.edit().putInt("selected_game", qualifierIndex).apply()
-                    prefs.edit().putString("qualifier", qualifier).apply()
-                    if (started)
-                        tableSpinner.setSelection(tableIndex)
-                }
-            }
+            GameSpinnerListener(this, prefs, gameSpinner, tableSpinner)
 
         tableSpinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    tableIndex = position
-
-                    val selectedTable = tableSpinner.selectedItem.toString()
-
-                    if (selectedTable != itemType) {
-                        itemType = selectedTable
-
-                        prefs.edit().putInt("item_type", tableIndex).apply()
-                        prefs.edit().putString("table", itemType).apply()
-
-                        if (itemType == "fish" || itemType == "insect" || itemType == "seafood") {
-                            seasonIndex = if (useCurrentSeason) thisSeason else seasonIndex
-                        } else {
-                            seasonIndex = 0
-                        }
-
-                        if (seasonIndex == 0) {
-                            myDataset = db.getData(qualifier + itemType.replace(" ", "_"))
-                            masterDataset = myDataset
-                        } else {
-                            myDataset =
-                                db.getSeasonData(qualifier, itemType.replace(" ", "_"), seasonValues[seasonIndex])
-                            masterDataset = myDataset
-                        }
-                    }
-                    if (started)
-                        filter(db, this@MainActivity)
-                }
-            }
+            TableSpinnerListener(this, db, prefs, tableSpinner)
 
         viewManager = LinearLayoutManager(this)
         viewAdapter = RecViewAdapter(myDataset, db, this)
@@ -368,31 +182,32 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.clearBtn).setOnClickListener {
             searchBar.text.clear()
         }
-        started = true
+        filter(db, this)
         progressBar.visibility = View.GONE
     }
 
     fun getThisSeason() {
-        if (useCurrentSeason) {
-            thisSeason = Calendar.getInstance().get(Calendar.MONTH)
-            thisSeason++
-            //august
-            if (thisSeason == 8) {
-                if (Calendar.getInstance().get(Calendar.DAY_OF_MONTH) > 15) {
-                    thisSeason++
-                }
-            } else if (thisSeason == 9) {
+        thisSeason = Calendar.getInstance().get(Calendar.MONTH)
+        thisSeason++
+        //august
+        if (thisSeason == 8) {
+            if (Calendar.getInstance().get(Calendar.DAY_OF_MONTH) > 15) {
                 thisSeason++
-                if (Calendar.getInstance().get(Calendar.DAY_OF_MONTH) > 15) {
-                    thisSeason++
-                }
-            } else if (thisSeason > 9) {
-                thisSeason += 2
             }
+        } else if (thisSeason == 9) {
+            thisSeason++
+            if (Calendar.getInstance().get(Calendar.DAY_OF_MONTH) > 15) {
+                thisSeason++
+            }
+        } else if (thisSeason > 9) {
+            thisSeason += 2
+        }
+        if (useCurrentSeason) {
             seasonIndex = thisSeason
+            selectedSeasonIndex = seasonIndex
         }
         else {
-            seasonIndex = 0
+            seasonIndex = selectedSeasonIndex
         }
     }
 
@@ -400,31 +215,191 @@ class MainActivity : AppCompatActivity() {
         qualifierIndex = prefs.getInt("selected_game", qualifierIndex)
         tableIndex = prefs.getInt("item_type", tableIndex)
         selectedFilter = prefs.getBoolean("filter", selectedFilter)
-        selected = prefs.getBoolean("selected", selected)
+        MainActivity.selected = prefs.getBoolean("selected", MainActivity.selected)
         firstTime = prefs.getBoolean("first_time", true)
         qualifier = prefs.getString("qualifier", qualifier) ?: "acnl_"
         itemType = prefs.getString("table", itemType) ?: "furniture"
         useCurrentSeason = prefs.getBoolean("use_current_date", true)
+        selectedSeasonIndex = prefs.getInt("selected_season", 0)
     }
 
-    fun hideKeyboard(activity: AppCompatActivity) {
-        val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        var view = activity.currentFocus
-        if (view == null) {
-            view = View(activity)
+    class TableSpinnerListener(val context: Context, val db: DBHelper, val prefs: SharedPreferences, val tableSpinner: Spinner) : AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(parent: AdapterView<*>?) {}
+        override fun onItemSelected(
+            parent: AdapterView<*>?,
+            view: View?,
+            position: Int,
+            id: Long
+        ) {
+            if (!started) {
+                started = true
+                return
+            }
+            tableIndex = position
+
+            val selectedTable = tableSpinner.selectedItem.toString()
+
+            if (selectedTable != itemType) {
+                itemType = selectedTable
+
+                prefs.edit().putInt("item_type", tableIndex).apply()
+                prefs.edit().putString("table", itemType).apply()
+
+                if (useSeasonData()) {
+                    seasonIndex = selectedSeasonIndex
+                } else {
+                    seasonIndex = 0
+                }
+
+                getData(db)
+            }
+            if (started)
+                filter(db, context)
         }
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    fun getItemTypeDisplayTable(): Array<String> {
-        when (qualifierIndex) {
-            0 -> return tableDisplayACGC
-            1 -> return tableDisplayACWW
-            2 -> return tableDisplayACCF
-            3 -> return tableDisplayACNL
-            4 -> return tableDisplayACNH
-            else -> return tableDisplayACNL
+    class GameSpinnerListener(val context: Context, val prefs: SharedPreferences, val tableSpinner: Spinner, val gameSpinner: Spinner) : AdapterView.OnItemSelectedListener {
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {}
+        override fun onItemSelected(
+            parent: AdapterView<*>?,
+            view: View?,
+            position: Int,
+            id: Long
+        ) {
+            if (!started) {
+                return
+            }
+            qualifierIndex = position
+            var tableDisplay = getItemTypeDisplayTable()
+            val tableAdapter = ArrayAdapter<String>(
+                context,
+                R.layout.spinner_layout,
+                tableDisplay
+            )
+            tableSpinner.adapter = tableAdapter
+            tableAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+            if (tableIndex >= tableDisplay.size)
+                tableIndex = 0
+
+            qualifierIndex = gameSpinner.selectedItemPosition
+
+            val selectedGame = gameValues[gameSpinner.selectedItemPosition]
+            qualifier = selectedGame
+            prefs.edit().putInt("selected_game", qualifierIndex).apply()
+            prefs.edit().putString("qualifier", qualifier).apply()
+            if (started)
+                tableSpinner.setSelection(tableIndex)
         }
+    }
+
+    fun filterBtnPressed(db: DBHelper, prefs: SharedPreferences) {
+        val alertBuilder = AlertDialog.Builder(this)
+        alertBuilder.apply {
+            val layout = LayoutInflater.from(context).inflate(R.layout.filter_alert, null)
+            setView(layout)
+
+            val seasonLbl = layout.findViewById<TextView>(R.id.seasonLbl)
+            val filterCheckBox = layout.findViewById<CheckBox>(R.id.filter)
+            val selectedCheckBox = layout.findViewById<CheckBox>(R.id.selected)
+            val fromSearchBar = layout.findViewById<EditText>(R.id.fromSearchBar)
+            val seasonSpinner = layout.findViewById<Spinner>(R.id.seasonSpinner)
+            val explainFilterImg = layout.findViewById<ImageView>(R.id.explainFilterBtn)
+
+            explainFilterImg.setOnClickListener { explainFilterBtnPressed() }
+
+            val seasonAdapter = ArrayAdapter<String>(
+                this@MainActivity,
+                android.R.layout.simple_spinner_item,
+                seasonDisplay
+            )
+
+            seasonSpinner.adapter = seasonAdapter
+            seasonAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+
+            filterCheckBox.isChecked = selectedFilter
+            selectedCheckBox.isChecked = MainActivity.selected
+            fromSearchBar.setText(from)
+
+            if (useSeasonData()) {
+                seasonSpinner.visibility = View.VISIBLE
+                seasonLbl.visibility = View.VISIBLE
+                seasonSpinner.setSelection(if (useCurrentSeason) thisSeason else seasonIndex)
+            } else {
+                seasonSpinner.visibility = View.GONE
+                seasonLbl.visibility = View.GONE
+                seasonSpinner.setSelection(0)
+            }
+
+            setPositiveButton("OK") { alert, _ ->
+                seasonIndex = seasonSpinner.selectedItemPosition
+                if (seasonSpinner.visibility == View.VISIBLE) {
+                    selectedSeasonIndex = seasonIndex
+                    prefs.edit().putInt("selected_season", selectedSeasonIndex).apply()
+                }
+
+                val selectedSeason = seasonSpinner.selectedItem.toString()
+                from = fromSearchBar.text.toString()
+                selectedFilter = filterCheckBox.isChecked
+                MainActivity.selected = selectedCheckBox.isChecked
+
+                if (Companion.selectedSeason != selectedSeason) {
+
+                    prefs.edit().putBoolean("filter", selectedFilter).apply()
+                    prefs.edit().putBoolean("selected", MainActivity.selected).apply()
+                    prefs.edit().putString("qualifier", qualifier).apply()
+
+                    if(!useSeasonData()) {
+                        seasonIndex = 0
+                    }
+
+                    getData(db)
+                }
+                filter(db, this@MainActivity)
+                alert.dismiss()
+            }
+        }.show()
+    }
+
+    fun settingsBtnPressed(db: DBHelper, prefs: SharedPreferences) {
+        val alertBuilder = AlertDialog.Builder(this@MainActivity)
+
+        alertBuilder.apply {
+            val layout = LayoutInflater.from(context).inflate(R.layout.settings_alert, null)
+            setView(layout)
+            val useCurrentDateCheckBox = layout.findViewById<CheckBox>(R.id.useCurrentDate)
+            val devBtn = layout.findViewById<Button>(R.id.devBtn)
+
+            useCurrentDateCheckBox.isChecked = useCurrentSeason
+
+            devBtn.setOnClickListener {
+                var alert: AlertDialog = showAlert(this@MainActivity, "Recreating Database. Please wait.")
+                createAsync(db, WeakReference(this@MainActivity), alert).execute()
+            }
+            setPositiveButton("OK") { alert, _ ->
+                prefs.edit().putBoolean("use_current_date", useCurrentDateCheckBox.isChecked).apply()
+                useCurrentSeason = useCurrentDateCheckBox.isChecked
+                if (useSeasonData()) {
+                    if (useCurrentSeason) {
+                        seasonIndex = thisSeason
+                        selectedSeasonIndex = seasonIndex
+                        prefs.edit().putInt("selected_season", selectedSeasonIndex)
+                    }
+                    getData(db)
+                    filter(db, this@MainActivity)
+                }
+            }
+        }.create().show()
+    }
+
+    fun explainFilterBtnPressed() {
+        val alertBuilder = AlertDialog.Builder(this@MainActivity)
+
+        alertBuilder.apply {
+            val layout = LayoutInflater.from(context).inflate(R.layout.explain_filter_alert, null)
+            setView(layout)
+            setPositiveButton("OK") { _, _ -> }
+        }.create().show()
     }
 }
 

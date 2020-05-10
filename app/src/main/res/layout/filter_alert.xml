@@ -17,6 +17,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/explainFilterBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/filter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/filter"
+        app:srcCompat="@android:drawable/ic_menu_help" />
+
     <CheckBox
         android:id="@+id/filter"
         android:layout_width="wrap_content"
@@ -73,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="Season:"
+        android:text="Month:"
         app:layout_constraintBottom_toBottomOf="@id/seasonSpinner"
         app:layout_constraintEnd_toStartOf="@+id/seasonSpinner"
         app:layout_constraintTop_toTopOf="@id/seasonSpinner" />
