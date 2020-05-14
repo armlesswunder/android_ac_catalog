@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
         tableDisplayACWW = db.getTableData(gameValues[1] + "table").toTypedArray()
         tableDisplayACCF = db.getTableData(gameValues[2] + "table").toTypedArray()
         tableDisplayACNL = db.getTableData(gameValues[3] + "table").toTypedArray()
-        tableDisplayACNH = db.getTableData(gameValues[4] + "table").toTypedArray()
+        tableDisplayACNH = db.getTableData(gameValues[4] + "table").toTypedArray();
 
         val gameSpinner = findViewById<Spinner>(R.id.gameSpinner)
         val tableSpinner = findViewById<Spinner>(R.id.tableSpinner)
@@ -383,7 +383,7 @@ class MainActivity : AppCompatActivity() {
                     if (useCurrentSeason) {
                         seasonIndex = thisSeason
                         selectedSeasonIndex = seasonIndex
-                        prefs.edit().putInt("selected_season", selectedSeasonIndex)
+                        prefs.edit().putInt("selected_season", selectedSeasonIndex).apply()
                     }
                     getData(db)
                     filter(db, this@MainActivity)
@@ -427,7 +427,7 @@ class RecViewAdapter(private val values : MutableList<MutableMap<String, String>
         holder.checkBtn.setOnClickListener {
             val index = item["Index"]!!
             item["Selected"] = if (item["Selected"] == "1") "0" else "1"
-            db.checkItem(index, qualifier + itemType.replace(" ", "_"), item["Selected"])
+            db.checkItem(index, item["Type"]!!.replace(" ", "_"), item["Selected"])
             if (selectedFilter)
                 filter(db, context)
         }
@@ -467,8 +467,10 @@ class RecViewAdapter(private val values : MutableList<MutableMap<String, String>
         val NORMAL = 0
         val HIDDEN = 1
 
+        val HIDDEN_VALUES = arrayOf("Selected", "Index", "Type")
+
         override fun getItemViewType(position: Int): Int {
-            return if (keys[position] == "Selected") HIDDEN else NORMAL
+            return if (HIDDEN_VALUES.contains(keys[position])) HIDDEN else NORMAL
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

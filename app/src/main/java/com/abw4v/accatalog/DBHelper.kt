@@ -10,6 +10,8 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
 
     companion object {
         val DATABASE_NAME = "catalog.db"
+        val ACNH_ALL_CLOTHING_TABLES = arrayOf("acnh_accessory", "acnh_bag", "acnh_bottom", "acnh_dress", "acnh_headwear", "acnh_shoe", "acnh_sock", "acnh_top")
+        val ACNH_ALL_FURNITURE_TABLES = arrayOf("acnh_houseware", "acnh_misc", "acnh_wall_mounted")
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -133,21 +135,63 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
     }
 
     fun getData(tableName: String): MutableList<MutableMap<String, String>> {
-        val cursor = getCursorData(tableName)
-
-
         val myDataset = emptyList<MutableMap<String, String>>().toMutableList()
-        cursor.moveToFirst()
-        do {
-            var map = emptyMap<String, String>().toMutableMap()
-            for (column in cursor.columnNames) {
-                map[column] = cursor.getString(cursor.getColumnIndex(column))
-            }
-            myDataset.add(map)
-        } while (cursor.moveToNext())
 
-        cursor.close()
-        return myDataset
+        if (tableName == "acnh_all_clothing") {
+
+            for (table in ACNH_ALL_CLOTHING_TABLES) {
+                val cursor = getCursorData(table)
+
+                cursor.moveToFirst()
+                do {
+                    var map = emptyMap<String, String>().toMutableMap()
+                    for (column in cursor.columnNames) {
+                        map[column] = cursor.getString(cursor.getColumnIndex(column))
+                    }
+                    map["Type"] = table
+                    myDataset.add(map)
+                } while (cursor.moveToNext())
+
+                cursor.close()
+            }
+            return myDataset.sortedWith(compareBy({ it["Name"] })).toMutableList()
+        }
+        else if (tableName == "acnh_all_furniture") {
+
+            for (table in ACNH_ALL_FURNITURE_TABLES) {
+                val cursor = getCursorData(table)
+
+                cursor.moveToFirst()
+                do {
+                    var map = emptyMap<String, String>().toMutableMap()
+                    for (column in cursor.columnNames) {
+                        map[column] = cursor.getString(cursor.getColumnIndex(column))
+                    }
+                    map["Type"] = table
+                    myDataset.add(map)
+                } while (cursor.moveToNext())
+
+                cursor.close()
+            }
+            return myDataset.sortedWith(compareBy({ it["Name"] })).toMutableList()
+        }
+        else {
+
+            val cursor = getCursorData(tableName)
+
+            cursor.moveToFirst()
+            do {
+                var map = emptyMap<String, String>().toMutableMap()
+                for (column in cursor.columnNames) {
+                    map[column] = cursor.getString(cursor.getColumnIndex(column))
+                }
+                map["Type"] = tableName
+                myDataset.add(map)
+            } while (cursor.moveToNext())
+
+            cursor.close()
+            return myDataset
+        }
     }
 
     fun getSeasonData(gameName: String, tableName: String, season: String): MutableList<MutableMap<String, String>> {
@@ -175,6 +219,10 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
             arrValues.add(cursor.getString(0).replace("_", " "))
         } while (cursor.moveToNext())
         cursor.close()
+        if (tableName == "acnh_table") {
+            arrValues.add(0, ("all_clothing").replace("_", " "))
+            arrValues.add(0, ("all_furniture").replace("_", " "))
+        }
         return arrValues
     }
 
