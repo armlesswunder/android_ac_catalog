@@ -14,8 +14,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.abw4v.accatalog.MainActivity.Companion.itemType
-import com.abw4v.accatalog.MainActivity.Companion.qualifier
 import com.abw4v.accatalog.MainActivity.Companion.selectedFilter
 import java.lang.ref.WeakReference
 import java.util.*
@@ -29,8 +27,7 @@ class MainActivity : AppCompatActivity() {
         var name = ""
         var from = ""
         var useCurrentSeason = false
-        var selected = false
-        var selectedFilter = false
+        var selectedFilter = ALL_ITEMS
         var qualifier = "acnh_"
         var selectedSeason = ""
         var qualifierIndex = 4
@@ -46,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         val gameDisplay = arrayOf("Gamecube", "Wild World", "City Folk", "New Leaf", "New Horizons")
         val seasonDisplay = arrayOf("(no filter)", "January", "February", "March", "April", "May", "June", "July", "August - 1st Half", "August - 2nd Half", "September - 1st Half", "September - 2nd Half", "October", "November", "December")
+        val selectedDisplay = arrayOf("All items", "Checked items", "Unchecked items")
 
         var tableDisplayACGC = emptyArray<String>()
         var tableDisplayACWW = emptyArray<String>()
@@ -214,8 +212,7 @@ class MainActivity : AppCompatActivity() {
     fun getDefaults(prefs: SharedPreferences) {
         qualifierIndex = prefs.getInt("selected_game", qualifierIndex)
         tableIndex = prefs.getInt("item_type", tableIndex)
-        selectedFilter = prefs.getBoolean("filter", selectedFilter)
-        MainActivity.selected = prefs.getBoolean("selected", MainActivity.selected)
+        selectedFilter = prefs.getInt("selected_filter", selectedFilter)
         firstTime = prefs.getBoolean("first_time", true)
         qualifier = prefs.getString("qualifier", qualifier) ?: "acnh_"
         itemType = prefs.getString("table", itemType) ?: "furniture"
@@ -300,13 +297,9 @@ class MainActivity : AppCompatActivity() {
             setView(layout)
 
             val seasonLbl = layout.findViewById<TextView>(R.id.seasonLbl)
-            val filterCheckBox = layout.findViewById<CheckBox>(R.id.filter)
-            val selectedCheckBox = layout.findViewById<CheckBox>(R.id.selected)
             val fromSearchBar = layout.findViewById<EditText>(R.id.fromSearchBar)
             val seasonSpinner = layout.findViewById<Spinner>(R.id.seasonSpinner)
-            val explainFilterImg = layout.findViewById<ImageView>(R.id.explainFilterBtn)
-
-            explainFilterImg.setOnClickListener { explainFilterBtnPressed() }
+            val selectedSpinner = layout.findViewById<Spinner>(R.id.selectedSpinner)
 
             val seasonAdapter = ArrayAdapter<String>(
                 this@MainActivity,
@@ -317,8 +310,16 @@ class MainActivity : AppCompatActivity() {
             seasonSpinner.adapter = seasonAdapter
             seasonAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
 
-            filterCheckBox.isChecked = selectedFilter
-            selectedCheckBox.isChecked = MainActivity.selected
+            val selectedAdapter = ArrayAdapter<String>(
+                this@MainActivity,
+                android.R.layout.simple_spinner_item,
+                selectedDisplay
+            )
+
+            selectedSpinner.adapter = selectedAdapter
+            selectedAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+            selectedSpinner.setSelection(selectedFilter)
+
             fromSearchBar.setText(from)
 
             if (useSeasonData()) {
@@ -340,13 +341,11 @@ class MainActivity : AppCompatActivity() {
 
                 val selectedSeason = seasonSpinner.selectedItem.toString()
                 from = fromSearchBar.text.toString()
-                selectedFilter = filterCheckBox.isChecked
-                MainActivity.selected = selectedCheckBox.isChecked
+                selectedFilter = selectedSpinner.selectedItemPosition
 
                 if (Companion.selectedSeason != selectedSeason) {
 
-                    prefs.edit().putBoolean("filter", selectedFilter).apply()
-                    prefs.edit().putBoolean("selected", MainActivity.selected).apply()
+                    prefs.edit().putInt("selected_filter", selectedFilter).apply()
                     prefs.edit().putString("qualifier", qualifier).apply()
 
                     if(!useSeasonData()) {
@@ -428,7 +427,7 @@ class RecViewAdapter(private val values : MutableList<MutableMap<String, String>
             val index = item["Index"]!!
             item["Selected"] = if (item["Selected"] == "1") "0" else "1"
             db.checkItem(index, item["Type"]!!.replace(" ", "_"), item["Selected"])
-            if (selectedFilter)
+            if (selectedFilter != ALL_ITEMS)
                 filter(db, context)
         }
         holder.detailsBtn.setOnClickListener {

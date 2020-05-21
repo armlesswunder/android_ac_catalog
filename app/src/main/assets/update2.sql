@@ -631,3 +631,7 @@ insert into acgc_sep2_insect values (3);
 insert into acgc_shirt values(257, 0, 'Houndstooth Knit', 'orderable', '?', 'winter');
 update acgc_shirt set "Name" = 'Toad Print' where "Index" = 242;
 insert into acgc_wallpaper values(68, 0, 'Backyard Fence', 'orderable', '?');
+update acnh_wall_mounted set "Name" = 'light switch (Gray)' where "Index" = 236;
+update acnh_wall_mounted set "Name" = 'light switch (Brown)' where "Index" = 237;
+update acnh_wall_mounted set "Name" = 'light switch (White)' where "Index" = 238;
+update acnh_wall_mounted set "Name" = 'light switch (Wood grain)' where "Index" = 239;

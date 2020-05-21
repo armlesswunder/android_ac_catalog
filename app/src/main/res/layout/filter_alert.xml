@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -17,35 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/explainFilterBtn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:tint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/filter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/filter"
-        app:srcCompat="@android:drawable/ic_menu_help" />
-
-    <CheckBox
-        android:id="@+id/filter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="Filter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/seasonSpinner" />
-
-    <CheckBox
-        android:id="@+id/selected"
-        android:text="Selected"
-        android:layout_margin="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/filter"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
     <EditText
         android:id="@+id/fromSearchBar"
         android:layout_width="0dp"
@@ -53,11 +25,11 @@
         android:layout_margin="8dp"
         android:layout_marginStart="8dp"
         android:hint="From"
-        android:singleLine="true"
         android:imeOptions="actionDone"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fromLbl"
-        app:layout_constraintTop_toBottomOf="@id/selected" />
+        app:layout_constraintTop_toBottomOf="@+id/selectedSpinner" />
 
     <TextView
         android:id="@+id/fromLbl"
@@ -88,5 +60,24 @@
         app:layout_constraintBottom_toBottomOf="@id/seasonSpinner"
         app:layout_constraintEnd_toStartOf="@+id/seasonSpinner"
         app:layout_constraintTop_toTopOf="@id/seasonSpinner" />
+
+    <Spinner
+        android:id="@+id/selectedSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seasonSpinner" />
+
+    <TextView
+        android:id="@+id/selectedLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="View:"
+        app:layout_constraintBottom_toBottomOf="@id/selectedSpinner"
+        app:layout_constraintEnd_toStartOf="@+id/selectedSpinner"
+        app:layout_constraintTop_toTopOf="@id/selectedSpinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

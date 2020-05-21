@@ -19204,10 +19204,10 @@ insert into acnh_wall_mounted values(232, 0, 'studio wall spotlight (Purple)', '
 insert into acnh_wall_mounted values(233, 0, 'studio wall spotlight (Blue)', 'orderable', '2300', 'Nook''s Cranny', 'facility', 'concert', 'None');
 insert into acnh_wall_mounted values(234, 0, 'studio wall spotlight (Green)', 'orderable', '2300', 'Nook''s Cranny', 'facility', 'concert', 'None');
 insert into acnh_wall_mounted values(235, 0, 'surveillance camera', 'orderable', '1000', 'Nook''s Cranny', 'facility', 'None', 'None');
-insert into acnh_wall_mounted values(236, 0, 'switch (Gray)', 'orderable', '340', 'Nook''s Cranny', 'living room', 'facility', 'None');
-insert into acnh_wall_mounted values(237, 0, 'switch (Brown)', 'orderable', '340', 'Nook''s Cranny', 'living room', 'facility', 'None');
-insert into acnh_wall_mounted values(238, 0, 'switch (White)', 'orderable', '340', 'Nook''s Cranny', 'living room', 'facility', 'None');
-insert into acnh_wall_mounted values(239, 0, 'switch (Wood grain)', 'orderable', '340', 'Nook''s Cranny', 'living room', 'facility', 'None');
+insert into acnh_wall_mounted values(236, 0, 'light switch (Gray)', 'orderable', '340', 'Nook''s Cranny', 'living room', 'facility', 'None');
+insert into acnh_wall_mounted values(237, 0, 'light switch (Brown)', 'orderable', '340', 'Nook''s Cranny', 'living room', 'facility', 'None');
+insert into acnh_wall_mounted values(238, 0, 'light switch (White)', 'orderable', '340', 'Nook''s Cranny', 'living room', 'facility', 'None');
+insert into acnh_wall_mounted values(239, 0, 'light switch (Wood grain)', 'orderable', '340', 'Nook''s Cranny', 'living room', 'facility', 'None');
 insert into acnh_wall_mounted values(240, 0, 'tapestry (Geometric pattern)', 'orderable', '880', 'Nook''s Cranny', 'living room', 'None', 'None');
 insert into acnh_wall_mounted values(241, 0, 'tapestry (Animal)', 'orderable', '880', 'Nook''s Cranny', 'living room', 'None', 'None');
 insert into acnh_wall_mounted values(242, 0, 'tapestry (Floral)', 'orderable', '880', 'Nook''s Cranny', 'living room', 'None', 'None');

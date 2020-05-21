@@ -6,6 +6,10 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 
+const val ALL_ITEMS = 0
+const val SELECTED_ITEMS = 1
+const val UNSELECTED_ITEMS = 2
+
 fun useSeasonData() : Boolean {
     return MainActivity.itemType == "fish" || MainActivity.itemType == "insect" || MainActivity.itemType == "seafood"
 }
@@ -43,8 +47,8 @@ fun getItemTypeDisplayTable(): Array<String> {
 
 fun filter(db: DBHelper, context: Context) {
 
-    if (MainActivity.selectedFilter) {
-        val sel = if (MainActivity.selected) "1" else "0"
+    if (MainActivity.selectedFilter != ALL_ITEMS) {
+        val sel = if (MainActivity.selectedFilter == SELECTED_ITEMS) "1" else "0"
         MainActivity.myDataset = MainActivity.masterDataset.filter { element -> element["Selected"] == sel
         }.toMutableList()
 

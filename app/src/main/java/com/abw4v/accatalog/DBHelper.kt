@@ -25,7 +25,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
             try {
                 db.execSQL(str)
                 lineNo++
-            } catch(e: SQLiteException) {
+            } catch(e: Throwable) {
                 lineNo++
                 errNo++
                 println("Error #$errNo on line $lineNo using sql statement: $str")
@@ -47,7 +47,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
             try {
                 db.execSQL(str)
                 lineNo++
-            } catch(e: SQLiteException) {
+            } catch(e: Throwable) {
                 lineNo++
                 errNo++
                 println("Error #$errNo on line $lineNo using sql statement: $str")
@@ -67,7 +67,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
             try {
                 db.execSQL(str)
                 lineNo++
-            } catch(e: SQLiteException) {
+            } catch(e: Throwable) {
                 lineNo++
                 errNo++
                 println("Error #$errNo on line $lineNo using sql statement: $str")
@@ -87,7 +87,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
             try {
                 db.execSQL(str)
                 lineNo++
-            } catch(e: SQLiteException) {
+            } catch(e: Throwable) {
                 lineNo++
                 errNo++
                 println("Error #$errNo on line $lineNo using sql statement: $str")
@@ -113,7 +113,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         try {
             cursor = db.rawQuery("select * from $tableName  order by \"Index\";", null)
         }
-        catch(e: SQLiteException) {
+        catch(e: Throwable) {
             println("Error getting cursor data: $e")
         }
         return cursor!!
@@ -128,7 +128,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
             else
                 cursor = db.rawQuery("select * from $gameName$tableName order by \"Index\";", null)
         }
-        catch(e: SQLiteException) {
+        catch(e: Throwable) {
             println("Error getting cursor data: $e")
         }
         return cursor!!
@@ -154,7 +154,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
 
                 cursor.close()
             }
-            return myDataset.sortedWith(compareBy({ it["Name"] })).toMutableList()
+            return myDataset.sortedWith(compareBy({ it["Name"]?.toLowerCase() })).toMutableList()
         }
         else if (tableName == "acnh_all_furniture") {
 
@@ -173,7 +173,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
 
                 cursor.close()
             }
-            return myDataset.sortedWith(compareBy({ it["Name"] })).toMutableList()
+            return myDataset.sortedWith(compareBy({ it["Name"]?.toLowerCase() })).toMutableList()
         }
         else {
 
@@ -203,6 +203,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
             for (column in cursor.columnNames) {
                 map[column] = cursor.getString(cursor.getColumnIndex(column))
             }
+            map["Type"] = gameName + tableName
             myDataset.add(map)
         } while (cursor.moveToNext())
 
