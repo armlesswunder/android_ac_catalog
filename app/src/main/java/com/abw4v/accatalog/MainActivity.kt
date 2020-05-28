@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         var seasonIndex = 0
         var selectedSeasonIndex = 0
         var thisSeason = 0
-        var itemType = "accessory"
+        var itemType = "all_furniture"
 
         lateinit var recyclerView: RecyclerView
         lateinit var viewAdapter: RecyclerView.Adapter<*>
