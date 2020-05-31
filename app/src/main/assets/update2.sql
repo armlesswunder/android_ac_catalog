@@ -1,5 +1,5 @@
 drop table if exists acgc_furniture;
-create table acgc_furniture ("Index" int primary key, Selected int, Name varchar(255), Price varchar(15), "From" varchar(63), Series varchar(63), Color varchar(31));
+create table acgc_furniture ("Index" int, Selected int, Name varchar(255), Price varchar(15), "From" varchar(63), Series varchar(63), Color varchar(31));
 insert into acgc_furniture values(1, 0, 'blue bed', '2100', 'Redd''s', 'Blue Series', 'none');
 insert into acgc_furniture values(2, 0, 'blue bench', '1900', 'Tom Nook''s Shop (Group A)', 'Blue Series', 'none');
 insert into acgc_furniture values(3, 0, 'blue bookcase', '1900', 'Tom Nook''s Shop (Group B)', 'Blue Series', 'none');

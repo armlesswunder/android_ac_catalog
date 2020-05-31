@@ -390,27 +390,9 @@ class MainActivity : AppCompatActivity() {
             }
         }.create().show()
     }
-
-    fun explainFilterBtnPressed() {
-        val alertBuilder = AlertDialog.Builder(this@MainActivity)
-
-        alertBuilder.apply {
-            val layout = LayoutInflater.from(context).inflate(R.layout.explain_filter_alert, null)
-            setView(layout)
-            setPositiveButton("OK") { _, _ -> }
-        }.create().show()
-    }
 }
 
 class RecViewAdapter(private val values : MutableList<MutableMap<String, String>>, private val db: DBHelper, private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    init {
-        this.setHasStableIds(true)
-    }
-
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return VHItem(
@@ -451,7 +433,6 @@ class RecViewAdapter(private val values : MutableList<MutableMap<String, String>
                 })
             }.show()
         }
-        holder.setIsRecyclable(false)
     }
     override fun getItemCount(): Int = values.size
 
@@ -493,14 +474,6 @@ class RecViewAdapter(private val values : MutableList<MutableMap<String, String>
         class VHItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val infoText: TextView = itemView.findViewById(R.id.infoText)
         }
-    }
-}
-
-fun isChecked(value: String?): Boolean {
-    if (value == null)
-        return false
-    else {
-        return value == "1"
     }
 }
 

@@ -3,10 +3,9 @@ package com.abw4v.accatalog
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 
-class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 3) {
+class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 4) {
 
     companion object {
         val DATABASE_NAME = "catalog.db"
@@ -95,6 +94,26 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         }
     }
 
+    fun update3(db: SQLiteDatabase) {
+
+        val sqlReader = SQLReader()
+        var sqlStr = sqlReader.getSQLData(context, "update3.sql")
+        var sqlArr = sqlStr?.split("\n")
+        var lineNo = 1
+        var errNo = 0
+
+        for (str in sqlArr!!) {
+            try {
+                db.execSQL(str)
+                lineNo++
+            } catch(e: Throwable) {
+                lineNo++
+                errNo++
+                println("Error #$errNo on line $lineNo using sql statement: $str")
+            }
+        }
+    }
+
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         //execute each update.sql file depending on which version the user is updating from
         //version is defined in the constructor ^
@@ -104,6 +123,9 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         }
         if (oldVersion < 3) {
             update2(db)
+        }
+        if (oldVersion < 4) {
+            update3(db)
         }
     }
 
