@@ -18,6 +18,8 @@ import com.abw4v.accatalog.MainActivity.Companion.selectedFilter
 import java.lang.ref.WeakReference
 import java.util.*
 import android.content.SharedPreferences
+import androidx.cardview.widget.CardView
+import com.abw4v.accatalog.MainActivity.Companion.useCritterWarningColors
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         var name = ""
         var from = ""
         var useCurrentSeason = false
+        var useCritterWarningColors = true
         var selectedFilter = ALL_ITEMS
         var qualifier = "acnh_"
         var selectedSeason = ""
@@ -217,6 +220,7 @@ class MainActivity : AppCompatActivity() {
         qualifier = prefs.getString("qualifier", qualifier) ?: "acnh_"
         itemType = prefs.getString("table", itemType) ?: "furniture"
         useCurrentSeason = prefs.getBoolean("use_current_date", true)
+        useCritterWarningColors = prefs.getBoolean("use_critter_warning_colors", true)
         selectedSeasonIndex = prefs.getInt("selected_season", 0)
     }
 
@@ -367,9 +371,11 @@ class MainActivity : AppCompatActivity() {
             val layout = LayoutInflater.from(context).inflate(R.layout.settings_alert, null)
             setView(layout)
             val useCurrentDateCheckBox = layout.findViewById<CheckBox>(R.id.useCurrentDate)
+            val useCritterWarningColorsCheckbox = layout.findViewById<CheckBox>(R.id.useCritterWarningColors)
             val devBtn = layout.findViewById<Button>(R.id.devBtn)
 
             useCurrentDateCheckBox.isChecked = useCurrentSeason
+            useCritterWarningColorsCheckbox.isChecked = useCritterWarningColors
 
             devBtn.setOnClickListener {
                 var alert: AlertDialog = showAlert(this@MainActivity, "Recreating Database. Please wait.")
@@ -377,7 +383,9 @@ class MainActivity : AppCompatActivity() {
             }
             setPositiveButton("OK") { alert, _ ->
                 prefs.edit().putBoolean("use_current_date", useCurrentDateCheckBox.isChecked).apply()
+                prefs.edit().putBoolean("use_critter_warning_colors", useCritterWarningColorsCheckbox.isChecked).apply()
                 useCurrentSeason = useCurrentDateCheckBox.isChecked
+                useCritterWarningColors = useCritterWarningColorsCheckbox.isChecked
                 if (useSeasonData()) {
                     if (useCurrentSeason) {
                         seasonIndex = thisSeason
@@ -404,6 +412,15 @@ class RecViewAdapter(private val values : MutableList<MutableMap<String, String>
         val item = values[position]
         (holder as VHItem).titleView.text = item["Name"]
         holder.checkBtn.isChecked = item["Selected"] == "1"
+
+        if (useCritterWarningColors && item.containsKey("GoneNextMonth") && item["GoneNextMonth"].equals("true")) {
+            holder.layoutBackground.setCardBackgroundColor(context.getColor(R.color.lightRed))
+        }
+        else if (useCritterWarningColors && item.containsKey("GonePreviousMonth") && item["GonePreviousMonth"].equals("true")) {
+            holder.layoutBackground.setCardBackgroundColor(context.getColor(R.color.lightGreen))
+        } else {
+            holder.layoutBackground.setCardBackgroundColor(context.getColor(R.color.colorWhite))
+        }
 
         holder.checkBtn.setOnClickListener {
             val index = item["Index"]!!
@@ -437,6 +454,7 @@ class RecViewAdapter(private val values : MutableList<MutableMap<String, String>
     override fun getItemCount(): Int = values.size
 
     class VHItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val layoutBackground: CardView = itemView.findViewById(R.id.layoutBackground)
         val titleView: TextView = itemView.findViewById(R.id.textView)
         val checkBtn: AppCompatCheckBox = itemView.findViewById(R.id.checkBtn)
         val detailsBtn: ImageView = itemView.findViewById(R.id.detailsBtn)
@@ -447,7 +465,7 @@ class RecViewAdapter(private val values : MutableList<MutableMap<String, String>
         val NORMAL = 0
         val HIDDEN = 1
 
-        val HIDDEN_VALUES = arrayOf("Selected", "Index", "Type")
+        val HIDDEN_VALUES = arrayOf("Selected", "Index", "Type", "GoneNextMonth", "GonePreviousMonth")
 
         override fun getItemViewType(position: Int): Int {
             return if (HIDDEN_VALUES.contains(keys[position])) HIDDEN else NORMAL

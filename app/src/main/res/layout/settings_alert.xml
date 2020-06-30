@@ -26,6 +26,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsLbl" />
 
+    <CheckBox
+        android:id="@+id/useCritterWarningColors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Critter warning colors"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/useCurrentDate" />
+
     <Button
         android:id="@+id/devBtn"
         android:layout_width="wrap_content"
@@ -37,7 +46,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/useCurrentDate" />
+        app:layout_constraintTop_toBottomOf="@id/useCritterWarningColors" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -224,10 +224,10 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         var previousMonthIndex = MainActivity.selectedSeasonIndex - 1
 
         if (nextMonthIndex >= MainActivity.seasonValues.size) {
-            nextMonthIndex = MainActivity.seasonValues.size - 1
+            nextMonthIndex = 1
         }
-        if (previousMonthIndex < 0) {
-            previousMonthIndex = 0
+        if (previousMonthIndex < 1) {
+            previousMonthIndex = MainActivity.seasonValues.size - 1
         }
 
         val nextMonthIndexes = getMonthIndexes(gameName, tableName, MainActivity.seasonValues[nextMonthIndex])
