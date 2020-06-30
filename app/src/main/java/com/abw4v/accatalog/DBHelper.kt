@@ -219,6 +219,20 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
     fun getSeasonData(gameName: String, tableName: String, season: String): MutableList<MutableMap<String, String>> {
         val cursor = getCursorData(gameName, tableName, season)
         val myDataset = emptyList<MutableMap<String, String>>().toMutableList()
+
+        var nextMonthIndex = MainActivity.selectedSeasonIndex + 1
+        var previousMonthIndex = MainActivity.selectedSeasonIndex - 1
+
+        if (nextMonthIndex >= MainActivity.seasonValues.size) {
+            nextMonthIndex = MainActivity.seasonValues.size - 1
+        }
+        if (previousMonthIndex < 0) {
+            previousMonthIndex = 0
+        }
+
+        val nextMonthIndexes = getMonthIndexes(gameName, tableName, MainActivity.seasonValues[nextMonthIndex])
+        val previousMonthIndexes = getMonthIndexes(gameName, tableName, MainActivity.seasonValues[previousMonthIndex])
+
         cursor.moveToFirst()
         do {
             var map = emptyMap<String, String>().toMutableMap()
@@ -226,7 +240,23 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
                 map[column] = cursor.getString(cursor.getColumnIndex(column))
             }
             map["Type"] = gameName + tableName
+            map["GoneNextMonth"] = if (!nextMonthIndexes.contains(map["Index"])) "true" else "false"
+            map["GonePreviousMonth"] = if (!previousMonthIndexes.contains(map["Index"])) "true" else "false"
             myDataset.add(map)
+        } while (cursor.moveToNext())
+
+        cursor.close()
+        return myDataset
+    }
+
+    fun getMonthIndexes(gameName: String, tableName: String, season: String) : MutableList<String> {
+        val cursor = getCursorData(gameName + season + tableName)
+        val myDataset = emptyList<String>().toMutableList()
+        cursor.moveToFirst()
+        do {
+            for (column in cursor.columnNames) {
+                myDataset.add(cursor.getString(cursor.getColumnIndex(column)))
+            }
         } while (cursor.moveToNext())
 
         cursor.close()
