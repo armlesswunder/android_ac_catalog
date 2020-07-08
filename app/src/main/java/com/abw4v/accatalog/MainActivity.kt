@@ -392,12 +392,16 @@ class MainActivity : AppCompatActivity() {
             val useCritterWarningColorsCheckbox = layout.findViewById<CheckBox>(R.id.useCritterWarningColors)
             val saveBtn = layout.findViewById<TextView>(R.id.saveBtn)
             val loadBtn = layout.findViewById<TextView>(R.id.loadBtn)
+            val devBtn = layout.findViewById<TextView>(R.id.devBtn)
 
             useCurrentDateCheckBox.isChecked = useCurrentSeason
             useCritterWarningColorsCheckbox.isChecked = useCritterWarningColors
 
+            devBtn.setOnClickListener {
+                db.recreate()
+            }
+
             loadBtn.setOnClickListener {
-                //reload = newRead(db)
                 globalDBHelper = WeakReference(db)
                 reload = true
                 val uri = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toUri()
@@ -618,27 +622,3 @@ class RecViewAdapter(private val values : MutableList<MutableMap<String, String>
     }
 }
 
-fun showAlert(context: Context, txt: String?) : AlertDialog {
-    val alertBuilder = AlertDialog.Builder(context)
-    return alertBuilder.apply {
-        val layout = LayoutInflater.from(context).inflate(R.layout.loading_alert, null)
-        setView(layout)
-        val msg = layout.findViewById<TextView>(R.id.loadingMsg)
-        if (txt != null)
-            msg.text = txt
-        setCancelable(false)
-    }.show()
-}
-
-class createAsync(private val db: DBHelper, private val weakContext: WeakReference<Context>, private val alertDialog: AlertDialog) : AsyncTask<String, Void, String?>() {
-
-    override fun doInBackground(vararg params: String?): String? {
-        db.recreate()
-        return null
-    }
-
-    override fun onPostExecute(result: String?) {
-        super.onPostExecute(result)
-        alertDialog.cancel()
-    }
-}

@@ -11,7 +11,7 @@ const val SELECTED_ITEMS = 1
 const val UNSELECTED_ITEMS = 2
 
 fun useSeasonData() : Boolean {
-    return MainActivity.itemType == "fish" || MainActivity.itemType == "insect" || MainActivity.itemType == "seafood"
+    return MainActivity.itemType == "fish" || MainActivity.itemType == "insect" || MainActivity.itemType == "seafood" || MainActivity.itemType == "sea_creatures"
 }
 
 fun getData(db: DBHelper) {
