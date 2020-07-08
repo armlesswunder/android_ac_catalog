@@ -1,9 +1,9 @@
 package com.abw4v.accatalog
 
+import android.app.Activity
 import android.content.Context
-import android.os.AsyncTask
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -18,8 +18,19 @@ import com.abw4v.accatalog.MainActivity.Companion.selectedFilter
 import java.lang.ref.WeakReference
 import java.util.*
 import android.content.SharedPreferences
+import android.net.Uri
+import android.os.*
+import android.provider.DocumentsContract
 import androidx.cardview.widget.CardView
+import androidx.core.net.toUri
 import com.abw4v.accatalog.MainActivity.Companion.useCritterWarningColors
+import java.io.*
+import java.lang.Exception
+import java.nio.charset.Charset
+
+const val CREATE_FILE = 1
+const val OPEN_FILE = 2
+lateinit var globalDBHelper: WeakReference<DBHelper>
 
 class MainActivity : AppCompatActivity() {
 
@@ -61,6 +72,7 @@ class MainActivity : AppCompatActivity() {
     }
     lateinit var progressBar: ProgressBar
     var firstTime = false
+    var fileStr = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +86,11 @@ class MainActivity : AppCompatActivity() {
             setupViews(prefs)
         }
         else {
+
+            //create read/write directory
+            val fileName = "acc_backup.sql"
+            val file = File(this@MainActivity.externalCacheDir!!.absolutePath, fileName)
+
             var alert: AlertDialog
             val alertBuilder = AlertDialog.Builder(this)
             var btn: Button?
@@ -368,18 +385,30 @@ class MainActivity : AppCompatActivity() {
         val alertBuilder = AlertDialog.Builder(this@MainActivity)
 
         alertBuilder.apply {
+            var reload = false
             val layout = LayoutInflater.from(context).inflate(R.layout.settings_alert, null)
             setView(layout)
             val useCurrentDateCheckBox = layout.findViewById<CheckBox>(R.id.useCurrentDate)
             val useCritterWarningColorsCheckbox = layout.findViewById<CheckBox>(R.id.useCritterWarningColors)
-            val devBtn = layout.findViewById<Button>(R.id.devBtn)
+            val saveBtn = layout.findViewById<TextView>(R.id.saveBtn)
+            val loadBtn = layout.findViewById<TextView>(R.id.loadBtn)
 
             useCurrentDateCheckBox.isChecked = useCurrentSeason
             useCritterWarningColorsCheckbox.isChecked = useCritterWarningColors
 
-            devBtn.setOnClickListener {
-                var alert: AlertDialog = showAlert(this@MainActivity, "Recreating Database. Please wait.")
-                createAsync(db, WeakReference(this@MainActivity), alert).execute()
+            loadBtn.setOnClickListener {
+                //reload = newRead(db)
+                globalDBHelper = WeakReference(db)
+                reload = true
+                val uri = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toUri()
+                openFile(uri!!)
+            }
+
+            saveBtn.setOnClickListener {
+                fileStr = db.backupData()
+                val uri = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toUri()
+                createFile(uri!!)
+
             }
             setPositiveButton("OK") { alert, _ ->
                 prefs.edit().putBoolean("use_current_date", useCurrentDateCheckBox.isChecked).apply()
@@ -395,8 +424,102 @@ class MainActivity : AppCompatActivity() {
                     getData(db)
                     filter(db, this@MainActivity)
                 }
+                else if (reload) {
+                    getData(db)
+                    filter(db, this@MainActivity)
+                }
             }
         }.create().show()
+    }
+
+    private fun createFile(pickerInitialUri: Uri) {
+        val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "text/sql"
+            putExtra(Intent.EXTRA_TITLE, "acc_backup.sql")
+            putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
+        }
+        startActivityForResult(intent, CREATE_FILE)
+    }
+
+    private fun openFile(pickerInitialUri: Uri) {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "text/sql"
+            putExtra(Intent.EXTRA_TITLE, "acc_backup.sql")
+            putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
+        }
+        startActivityForResult(intent, OPEN_FILE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
+        if (requestCode == CREATE_FILE && resultCode == Activity.RESULT_OK) {
+            resultData?.data?.also { outputUri ->
+                val fileName = "acc_backup.sql"
+                val out = openFileOutput(fileName, Context.MODE_PRIVATE)
+                out.write(fileStr.toByteArray(Charset.defaultCharset()))
+                out.close()
+                val yourFilePath = "$filesDir/$fileName"
+                val newFile = File(yourFilePath)
+                val file = File(this@MainActivity.externalCacheDir!!.absolutePath, fileName)
+                try {
+                    val fis = FileInputStream(newFile)
+                    val fos = FileOutputStream(file)
+                    val buffer = ByteArray(4096)
+                    var len: Int
+                    len = fis.read(buffer)
+                    while (len != -1) {
+                        fos.write(buffer, 0, len)
+                        len = fis.read(buffer)
+                    }
+                    fos.close()
+                    fis.close()
+                } catch (e: Exception) {
+                    println(e)
+                }
+                FileInputStream(newFile).use { inputStream ->
+                    this.contentResolver.openFileDescriptor(outputUri, "w")?.use {
+                        FileOutputStream(it.fileDescriptor).use { outputStream ->
+                            if (android.os.Build.VERSION.SDK_INT >= 29) {
+                                FileUtils.copy(inputStream, outputStream)
+                            } else {
+                                outputStream.write(inputStream.readBytes())
+                            }
+                        }
+                    }
+                }
+            }
+        } else if (requestCode == OPEN_FILE && resultCode == Activity.RESULT_OK) {
+            resultData?.data?.also { inputUri ->
+                try {
+                    this.contentResolver.openFileDescriptor(inputUri, "r")?.use {
+                        FileInputStream(it.fileDescriptor).use { inputStream ->
+                            val buffer = StringBuffer()
+                            val reader = inputStream.bufferedReader()
+                            var line = reader.readLine()
+                            while (line != null) {
+                                buffer.append(line)
+                                line = reader.readLine()
+                            }
+                            fileStr = buffer.toString()
+                        }
+                    }
+
+
+                    globalDBHelper.get()?.executeSQLFromFile(fileStr)
+
+                    val alertBuilder1 = AlertDialog.Builder(this@MainActivity)
+                    alertBuilder1.apply {
+                        setTitle("Success")
+                        setMessage("Successfully loaded backup file.")
+                        setPositiveButton("OK") { _, _ -> }
+                    }.show()
+
+                } catch (e: Exception) {
+
+                }
+            }
+        }
     }
 }
 

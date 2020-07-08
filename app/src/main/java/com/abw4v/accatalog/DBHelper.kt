@@ -15,7 +15,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
 
     override fun onCreate(db: SQLiteDatabase) {
         val sqlReader = SQLReader()
-        var sqlStr = sqlReader.getSQLData(context, "create_db.sql")
+        var sqlStr = sqlReader.getSQLDataFromAssets(context, "create_db.sql")
         var sqlArr = sqlStr?.split("\n")
         var lineNo = 1
         var errNo = 0
@@ -37,7 +37,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
 
         val db = this.writableDatabase
         val sqlReader = SQLReader()
-        var sqlStr = sqlReader.getSQLData(context, "dev.sql")
+        var sqlStr = sqlReader.getSQLDataFromAssets(context, "dev.sql")
         var sqlArr = sqlStr?.split("\n")
         var lineNo = 1
         var errNo = 0
@@ -57,7 +57,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
     fun update1(db: SQLiteDatabase) {
 
         val sqlReader = SQLReader()
-        var sqlStr = sqlReader.getSQLData(context, "update1.sql")
+        var sqlStr = sqlReader.getSQLDataFromAssets(context, "update1.sql")
         var sqlArr = sqlStr?.split("\n")
         var lineNo = 1
         var errNo = 0
@@ -77,7 +77,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
     fun update2(db: SQLiteDatabase) {
 
         val sqlReader = SQLReader()
-        var sqlStr = sqlReader.getSQLData(context, "update2.sql")
+        var sqlStr = sqlReader.getSQLDataFromAssets(context, "update2.sql")
         var sqlArr = sqlStr?.split("\n")
         var lineNo = 1
         var errNo = 0
@@ -97,12 +97,32 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
     fun update3(db: SQLiteDatabase) {
 
         val sqlReader = SQLReader()
-        var sqlStr = sqlReader.getSQLData(context, "update3.sql")
+        var sqlStr = sqlReader.getSQLDataFromAssets(context, "update3.sql")
         var sqlArr = sqlStr?.split("\n")
         var lineNo = 1
         var errNo = 0
 
         for (str in sqlArr!!) {
+            try {
+                db.execSQL(str)
+                lineNo++
+            } catch(e: Throwable) {
+                lineNo++
+                errNo++
+                println("Error #$errNo on line $lineNo using sql statement: $str")
+            }
+        }
+    }
+
+    fun executeSQLFromFile(sqlStr: String) {
+
+        val db = this.writableDatabase
+        val newStr = sqlStr.replace(";", ";\n")
+        val sqlArr = newStr.split("\n")
+        var lineNo = 1
+        var errNo = 0
+
+        for (str in sqlArr) {
             try {
                 db.execSQL(str)
                 lineNo++
@@ -288,4 +308,94 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         val result = db.execSQL("update ${tableName} set Selected = ${value} where \"Index\" = ${index};")
         println("Successfully updated table: $tableName item number: $index set to: $value. Result: $result")
     }
+
+    fun backupData(): String {
+        val db = this.readableDatabase
+        var buffer = StringBuffer()
+
+        //acgc backup
+        for (table in MainActivity.tableDisplayACGC) {
+            val tableName = ("acgc_" + table).replace(" ", "_")
+            if (tableName.contains("_all_"))
+                continue
+            val backupList = getBackupData(tableName)
+
+            for (writeData in backupList) {
+                buffer.append("update $tableName set \"Selected\" = 1 where \"Index\" = $writeData;\n")
+            }
+        }
+        //acww backup
+        for (table in MainActivity.tableDisplayACWW) {
+            val tableName = ("acww_" + table).replace(" ", "_")
+            if (tableName.contains("_all_"))
+                continue
+            val backupList = getBackupData(tableName)
+
+            for (writeData in backupList) {
+                buffer.append("update $tableName set \"Selected\" = 1 where \"Index\" = $writeData;\n")
+            }
+        }
+        //accf backup
+        for (table in MainActivity.tableDisplayACCF) {
+            val tableName = ("accf_" + table).replace(" ", "_")
+            if (tableName.contains("_all_"))
+                continue
+            val backupList = getBackupData(tableName)
+
+            for (writeData in backupList) {
+                buffer.append("update $tableName set \"Selected\" = 1 where \"Index\" = $writeData;\n")
+            }
+        }
+        //acnl backup
+        for (table in MainActivity.tableDisplayACNL) {
+            val tableName = ("acnl_" + table).replace(" ", "_")
+            if (tableName.contains("_all_"))
+                continue
+            val backupList = getBackupData(tableName)
+
+            for (writeData in backupList) {
+                buffer.append("update $tableName set \"Selected\" = 1 where \"Index\" = $writeData;\n")
+            }
+        }
+        //acnh backup
+        for (table in MainActivity.tableDisplayACNH) {
+            val tableName = ("acnh_" + table).replace(" ", "_")
+            if (tableName.contains("_all_"))
+                continue
+            val backupList = getBackupData(tableName)
+
+            for (writeData in backupList) {
+                buffer.append("update $tableName set \"Selected\" = 1 where \"Index\" = $writeData;\n")
+            }
+        }
+        return buffer.toString()
+    }
+
+    fun getBackupData(tableName: String): MutableList<String> {
+        val myDataset = emptyList<String>().toMutableList()
+        val cursor = getBackupCursorData(tableName)
+
+        cursor.moveToFirst()
+        do {
+            if (cursor.count > 0) {
+                myDataset.add(cursor.getString(0))
+            }
+        } while (cursor.moveToNext())
+
+        cursor.close()
+        return myDataset
+    }
+
+    fun getBackupCursorData(tableName: String): Cursor {
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+        try {
+            cursor = db.rawQuery("select \"Index\" from $tableName where \"Selected\" = 1;", null)
+        }
+        catch(e: Throwable) {
+            println("Error getting cursor data: $e")
+        }
+        return cursor!!
+    }
+
 }
