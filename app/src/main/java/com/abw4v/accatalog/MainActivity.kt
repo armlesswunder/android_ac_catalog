@@ -30,6 +30,8 @@ import java.nio.charset.Charset
 
 const val CREATE_FILE = 1
 const val OPEN_FILE = 2
+
+const val faqURL = "https://github.com/armlesswunder/android_ac_catalog/blob/master/README.md#faq"
 lateinit var globalDBHelper: WeakReference<DBHelper>
 
 class MainActivity : AppCompatActivity() {
@@ -236,7 +238,7 @@ class MainActivity : AppCompatActivity() {
         firstTime = prefs.getBoolean("first_time", true)
         qualifier = prefs.getString("qualifier", qualifier) ?: "acnh_"
         itemType = prefs.getString("table", itemType) ?: "furniture"
-        useCurrentSeason = prefs.getBoolean("use_current_date", true)
+        useCurrentSeason = prefs.getBoolean("use_current_date", false)
         useCritterWarningColors = prefs.getBoolean("use_critter_warning_colors", true)
         selectedSeasonIndex = prefs.getInt("selected_season", 0)
     }
@@ -393,9 +395,16 @@ class MainActivity : AppCompatActivity() {
             val saveBtn = layout.findViewById<TextView>(R.id.saveBtn)
             val loadBtn = layout.findViewById<TextView>(R.id.loadBtn)
             val devBtn = layout.findViewById<TextView>(R.id.devBtn)
+            val faqBtn = layout.findViewById<TextView>(R.id.faqBtn)
 
             useCurrentDateCheckBox.isChecked = useCurrentSeason
             useCritterWarningColorsCheckbox.isChecked = useCritterWarningColors
+
+            faqBtn.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(faqURL));
+                startActivity(intent);
+            }
 
             devBtn.setOnClickListener {
                 db.recreate()
