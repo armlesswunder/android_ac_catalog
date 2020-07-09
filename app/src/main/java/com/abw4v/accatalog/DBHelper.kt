@@ -5,7 +5,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 4) {
+class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 5) {
 
     companion object {
         val DATABASE_NAME = "catalog.db"
@@ -114,6 +114,26 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         }
     }
 
+    fun update4(db: SQLiteDatabase) {
+
+        val sqlReader = SQLReader()
+        var sqlStr = sqlReader.getSQLDataFromAssets(context, "update4.sql")
+        var sqlArr = sqlStr?.split("\n")
+        var lineNo = 1
+        var errNo = 0
+
+        for (str in sqlArr!!) {
+            try {
+                db.execSQL(str)
+                lineNo++
+            } catch(e: Throwable) {
+                lineNo++
+                errNo++
+                println("Error #$errNo on line $lineNo using sql statement: $str")
+            }
+        }
+    }
+
     fun executeSQLFromFile(sqlStr: String) {
 
         val db = this.writableDatabase
@@ -146,6 +166,9 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         }
         if (oldVersion < 4) {
             update3(db)
+        }
+        if (oldVersion < 5) {
+            update4(db)
         }
     }
 
@@ -196,7 +219,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
 
                 cursor.close()
             }
-            return myDataset.sortedWith(compareBy({ it["Name"]?.toLowerCase() })).toMutableList()
+            return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase() }).toMutableList()
         }
         else if (tableName == "acnh_all_furniture") {
 
@@ -215,7 +238,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
 
                 cursor.close()
             }
-            return myDataset.sortedWith(compareBy({ it["Name"]?.toLowerCase() })).toMutableList()
+            return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase() }).toMutableList()
         }
         else {
 
@@ -232,7 +255,10 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
             } while (cursor.moveToNext())
 
             cursor.close()
-            return myDataset
+            if (tableName.contains("acnh_") && !useSeasonData())
+                return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase() }).toMutableList()
+            else
+                return myDataset
         }
     }
 

@@ -31,6 +31,7 @@ import java.nio.charset.Charset
 const val CREATE_FILE = 1
 const val OPEN_FILE = 2
 
+const val guideURL = "https://github.com/armlesswunder/android_ac_catalog/blob/master/README.md#faq"
 const val faqURL = "https://github.com/armlesswunder/android_ac_catalog/blob/master/README.md#faq"
 lateinit var globalDBHelper: WeakReference<DBHelper>
 
@@ -396,9 +397,16 @@ class MainActivity : AppCompatActivity() {
             val loadBtn = layout.findViewById<TextView>(R.id.loadBtn)
             val devBtn = layout.findViewById<TextView>(R.id.devBtn)
             val faqBtn = layout.findViewById<TextView>(R.id.faqBtn)
+            val guideBtn = layout.findViewById<TextView>(R.id.guideBtn)
 
             useCurrentDateCheckBox.isChecked = useCurrentSeason
             useCritterWarningColorsCheckbox.isChecked = useCritterWarningColors
+
+            guideBtn.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(guideURL));
+                startActivity(intent);
+            }
 
             faqBtn.setOnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW);

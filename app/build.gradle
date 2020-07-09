@@ -11,8 +11,8 @@ android {
         applicationId "com.abw4v.accatalog"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 6
-        versionName "1.3.1"
+        versionCode 7
+        versionName "1.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
