@@ -92,6 +92,6 @@ If you post negative reviews because you haven't tested this feature, please rem
 ## Q: This app has way to many items, it would be so much easier to find what I am looking for if there was some way to filter items.
 
 A: There is no lack of filtering options in this app. Learn to use the searchbar, filter settings, and month settings for critters.
-https://github.com/armlesswunder/android_ac_catalog/edit/master/README.md#guide#searchbar
-https://github.com/armlesswunder/android_ac_catalog/edit/master/README.md#guide#filter
-https://github.com/armlesswunder/android_ac_catalog/edit/master/README.md#guide#months
+https://github.com/armlesswunder/android_ac_catalog/edit/master/README.md#searchbar
+https://github.com/armlesswunder/android_ac_catalog/edit/master/README.md#filter-magnifying-glass
+https://github.com/armlesswunder/android_ac_catalog/edit/master/README.md#month
