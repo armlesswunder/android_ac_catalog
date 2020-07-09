@@ -3,6 +3,16 @@ Android version of Animal Crossing Catalog
 
 # Guide
 
+![picture](Images/MainIndex.png)
+
+1) Game selector
+2) Item type selector
+3) Searchbar
+4) Settings
+5) Filter
+6) Extra info button
+7) Checkbox
+
 ## Game selector
 Appears in the top left of the main screen. Use this to change which games item lists you are viewing. 
 Supports main series games: 
@@ -19,6 +29,16 @@ When you type into the searchbar, all items with names that do not include the t
 ## Filter (magnifying glass)
 Appears on the top right of top bar. Pressing this opens a dialog with several options so that you can filter which items appear in the item list.
 
+![picture](Images/FilterIndex.png)
+
+1) Month
+2) View
+3) From
+
+### Month
+This option only appears when you are viewing fish/bugs/sea creatures. It will make it to where only critters available in the month you have chosen (whether you know you chose it or not) will appear in the list of critters you are viewing. 
+This option can be chosen automatically for you if you use the setting "use current date". 
+
 ### View
 *Options*
 All items: view items regardless of whether they are checked. (default)
@@ -29,16 +49,6 @@ Unchecked items: view unchecked items only
 Search for items based on where the item is from. 
 
 This one is a little advanced, but quite useful when searching from items from a specific source. (eg: nooks, ables, sahara...) It works exactly like the searchbar for item names except it filters items by where they are from.
-
-### Month
-This option only appears when you are viewing fish/bugs/sea creatures. It will make it to where only critters available in the month you have chosen (whether you know you chose it or not) will appear in the list of critters you are viewing. 
-This option can be chosen automatically for you if you use the setting "use current date". 
-
-## Item list
-A scrollable list of items which appear based on your selector settings and filter settings.
-
-## Items
-Contains the item name, extra info button (little green i icon), and a checkbox for that item.
 
 ### Item name
 The name of the item as it appears in your inventory. May contain the variation of the item for new horizons.
@@ -56,6 +66,15 @@ Check items off your list. Your selection is saved as soon as you do it.
 ## Settings
 Run-of-the-Mill app settings
 
+![picture](Images/SettingsIndex.png)
+
+1) Use current date
+2) Critter warning colors
+3) Load app state
+4) Save app state
+5) Guide
+6) FAQ
+
 ### Use current date
 Looks at your phones date to determine what month it is. That month is then used to display only critters available in that month by default. You can still change the month in filter to look up facts quickly.
 Default unchecked (updated in 1.4 since so many people are confused by this).
@@ -63,17 +82,17 @@ Default unchecked (updated in 1.4 since so many people are confused by this).
 ### Critter warning colors
 Changes item background to red, if the critter is gone next month, or or green, if the critter wasn't in the previous month.
 
-### Save app state
-Create a backup of your checklist data.
-
 ### Load app state
 Load a backup of your checklist data.
 
 Backups only attempt to check items, it will never erase items you have checked. It is safe to rename the file to whatever you want.
 
 *If you edit your backup data files contents and you break everything, don't complain about it to me.
-The file is saved as a sql file. So if you know sql, you could load some crazy stuff into this app. 
+The file is saved as a sql file. If you know sql, you could load some crazy (or useful) stuff into this app. 
 Again, I'm not responsible for what you do with your file*
+
+### Save app state
+Create a backup of your checklist data.
 
 ### Guide
 Brings you here!
