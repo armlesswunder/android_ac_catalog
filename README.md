@@ -78,9 +78,6 @@ Again, I'm not responsible for what you do with your file*
 ### Guide
 Brings you here!
 
-### FAQ
-Takes you to questions (assertions) people ask (assert) about this app
-
 # FAQ
 
 ## Q: This app is missing a bunch of fish/bugs/sea creatures.
