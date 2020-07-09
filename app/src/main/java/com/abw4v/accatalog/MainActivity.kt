@@ -31,7 +31,7 @@ import java.nio.charset.Charset
 const val CREATE_FILE = 1
 const val OPEN_FILE = 2
 
-const val guideURL = "https://github.com/armlesswunder/android_ac_catalog/blob/master/README.md#faq"
+const val guideURL = "https://github.com/armlesswunder/android_ac_catalog/blob/master/README.md#guide"
 const val faqURL = "https://github.com/armlesswunder/android_ac_catalog/blob/master/README.md#faq"
 lateinit var globalDBHelper: WeakReference<DBHelper>
 
