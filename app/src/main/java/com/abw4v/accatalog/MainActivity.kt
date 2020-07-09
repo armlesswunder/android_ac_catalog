@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             val fileName = "acc_backup.sql"
             val file = File(this@MainActivity.externalCacheDir!!.absolutePath, fileName)
 
-            var alert: AlertDialog
+            val alert: AlertDialog
             val alertBuilder = AlertDialog.Builder(this)
             var btn: Button?
             alert = alertBuilder.apply {
@@ -422,7 +422,17 @@ class MainActivity : AppCompatActivity() {
                 globalDBHelper = WeakReference(db)
                 reload = true
                 val uri = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toUri()
-                openFile(uri!!)
+                if (uri != null) {
+                    openFile(uri)
+                }
+                else {
+                    val alertBuilder1 = AlertDialog.Builder(this@MainActivity)
+                    alertBuilder1.apply {
+                        setTitle("Error")
+                        setMessage("Could not find a downloads folder on this device.")
+                        setPositiveButton("OK") { _, _ -> }
+                    }.show()
+                }
             }
 
             saveBtn.setOnClickListener {
@@ -537,7 +547,6 @@ class MainActivity : AppCompatActivity() {
                     }.show()
 
                 } catch (e: Exception) {
-
                 }
             }
         }
