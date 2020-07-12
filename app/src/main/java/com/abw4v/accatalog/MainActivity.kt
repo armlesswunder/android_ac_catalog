@@ -466,7 +466,7 @@ class MainActivity : AppCompatActivity() {
     private fun createFile(pickerInitialUri: Uri) {
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
-            type = "text/sql"
+            type = "text/*"
             putExtra(Intent.EXTRA_TITLE, "acc_backup.sql")
             putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
         }
@@ -476,7 +476,7 @@ class MainActivity : AppCompatActivity() {
     private fun openFile(pickerInitialUri: Uri) {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
-            type = "text/sql"
+            type = "text/*"
             putExtra(Intent.EXTRA_TITLE, "acc_backup.sql")
             putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
         }
