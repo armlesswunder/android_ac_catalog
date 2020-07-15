@@ -476,8 +476,7 @@ class MainActivity : AppCompatActivity() {
     private fun openFile(pickerInitialUri: Uri) {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
-            type = "text/*"
-            putExtra(Intent.EXTRA_TITLE, "acc_backup.sql")
+            type = "*/*"
             putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
         }
         startActivityForResult(intent, OPEN_FILE)

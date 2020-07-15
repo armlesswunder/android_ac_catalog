@@ -53,7 +53,7 @@ fun filter(db: DBHelper, context: Context) {
         }.toMutableList()
 
         MainActivity.myDataset = MainActivity.myDataset.filter { element ->
-            element["Name"]!!.toLowerCase().contains(MainActivity.name.toLowerCase())
+            element["Name"]!!.toLowerCase().replace("-", " ").contains(MainActivity.name.toLowerCase().replace("-", " "))
         }.toMutableList()
 
 
@@ -66,7 +66,7 @@ fun filter(db: DBHelper, context: Context) {
     else {
 
         MainActivity.myDataset = MainActivity.masterDataset.filter { element ->
-            element["Name"]!!.toLowerCase().contains(MainActivity.name.toLowerCase())
+            element["Name"]!!.toLowerCase().replace("-", " ").contains(MainActivity.name.toLowerCase().replace("-", " "))
         }.toMutableList()
 
 

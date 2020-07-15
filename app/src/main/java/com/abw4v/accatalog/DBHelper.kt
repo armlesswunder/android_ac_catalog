@@ -219,7 +219,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
 
                 cursor.close()
             }
-            return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase() }).toMutableList()
+            return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase()!!.replace("-", " ") }).toMutableList()
         }
         else if (tableName == "acnh_all_furniture") {
 
@@ -238,7 +238,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
 
                 cursor.close()
             }
-            return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase() }).toMutableList()
+            return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase()!!.replace("-", " ") }).toMutableList()
         }
         else {
 
@@ -256,7 +256,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
 
             cursor.close()
             if (tableName.contains("acnh_") && !useSeasonData())
-                return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase() }).toMutableList()
+                return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase()!!.replace("-", " ") }).toMutableList()
             else
                 return myDataset
         }
