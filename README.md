@@ -3,6 +3,8 @@ Android version of Animal Crossing Catalog
 
 Contact: abw4v.dev@gmail.com
 
+Play Store: https://play.google.com/store/apps/details?id=com.abw4v.accatalog
+
 # Guide
 
 ![picture](Images/MainIndex.png)
