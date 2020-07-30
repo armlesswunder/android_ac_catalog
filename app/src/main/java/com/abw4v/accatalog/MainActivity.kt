@@ -68,6 +68,9 @@ class MainActivity : AppCompatActivity() {
         var tableDisplayACNL = emptyArray<String>()
         var tableDisplayACNH = emptyArray<String>()
 
+        var tablePreferences = emptyList<MutableMap<String, String>>().toMutableList()
+        var selectedTablePreferences = emptyMap<String, String>().toMutableMap()
+
         var started = false
 
         val gameValues = arrayOf("acgc_", "acww_", "accf_", "acnl_", "acnh_")
@@ -124,7 +127,10 @@ class MainActivity : AppCompatActivity() {
     fun setupViews(prefs: SharedPreferences) {
         val db = DBHelper(this)
 
-        findViewById<ImageView>(R.id.settingsBtn).setOnClickListener {
+        tablePreferences = db.getPreferencesData()
+        setupPreferences()
+
+            findViewById<ImageView>(R.id.settingsBtn).setOnClickListener {
             settingsBtnPressed(db, prefs)
         }
 
@@ -142,7 +148,7 @@ class MainActivity : AppCompatActivity() {
         tableDisplayACWW = db.getTableData(gameValues[1] + "table").toTypedArray()
         tableDisplayACCF = db.getTableData(gameValues[2] + "table").toTypedArray()
         tableDisplayACNL = db.getTableData(gameValues[3] + "table").toTypedArray()
-        tableDisplayACNH = db.getTableData(gameValues[4] + "table").toTypedArray();
+        tableDisplayACNH = db.getTableData(gameValues[4] + "table").toTypedArray()
 
         val gameSpinner = findViewById<Spinner>(R.id.gameSpinner)
         val tableSpinner = findViewById<Spinner>(R.id.tableSpinner)
@@ -232,6 +238,35 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun setupPreferences() {
+        val table = (qualifier + itemType).replace(" ", "_")
+        for (prefs in tablePreferences) {
+            if (prefs["table_name"] == table) {
+                selectedTablePreferences = prefs
+                break
+            }
+        }
+
+        from = selectedTablePreferences["from"] ?: ""
+        selectedFilter = selectedTablePreferences["selected_filter"]?.toIntOrNull() ?: 0
+    }
+
+    fun setPreferences(db: DBHelper) {
+        val tableName = (qualifier + itemType).replace(" ", "_")
+        val map = db.setPrefs(tableName, from, selectedFilter.toString())
+        var i = 0;
+        for (prefs in tablePreferences) {
+            if (prefs["table_name"] == tableName) {
+                break
+            }
+            i++
+        }
+        if (i < tablePreferences.size && map != null) {
+            tablePreferences[i] = map
+        }
+        setupPreferences()
+    }
+
     fun getDefaults(prefs: SharedPreferences) {
         qualifierIndex = prefs.getInt("selected_game", qualifierIndex)
         tableIndex = prefs.getInt("item_type", tableIndex)
@@ -244,7 +279,7 @@ class MainActivity : AppCompatActivity() {
         selectedSeasonIndex = prefs.getInt("selected_season", 0)
     }
 
-    class TableSpinnerListener(val context: Context, val db: DBHelper, val prefs: SharedPreferences, val tableSpinner: Spinner) : AdapterView.OnItemSelectedListener {
+    inner class TableSpinnerListener(val context: Context, val db: DBHelper, val prefs: SharedPreferences, val tableSpinner: Spinner) : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {}
         override fun onItemSelected(
             parent: AdapterView<*>?,
@@ -274,12 +309,14 @@ class MainActivity : AppCompatActivity() {
 
                 getData(db)
             }
-            if (started)
+            if (started) {
+                setupPreferences()
                 filter(db, context)
+            }
         }
     }
 
-    class GameSpinnerListener(val context: Context, val prefs: SharedPreferences, val tableSpinner: Spinner, val gameSpinner: Spinner) : AdapterView.OnItemSelectedListener {
+    inner class GameSpinnerListener(val context: Context, val prefs: SharedPreferences, val tableSpinner: Spinner, val gameSpinner: Spinner) : AdapterView.OnItemSelectedListener {
 
         override fun onNothingSelected(parent: AdapterView<*>?) {}
         override fun onItemSelected(
@@ -366,6 +403,7 @@ class MainActivity : AppCompatActivity() {
                 val selectedSeason = seasonSpinner.selectedItem.toString()
                 from = fromSearchBar.text.toString()
                 selectedFilter = selectedSpinner.selectedItemPosition
+                setPreferences(db)
 
                 if (Companion.selectedSeason != selectedSeason) {
 

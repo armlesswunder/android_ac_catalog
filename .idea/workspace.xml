@@ -35,7 +35,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_29" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_26" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -50,40 +50,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/DBHelper.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="221" column="97" selection-start-line="221" selection-start-column="79" selection-end-line="221" selection-end-column="97" />
+            <state relative-caret-position="103">
+              <caret line="542" selection-start-line="542" selection-end-line="542" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/settings_alert.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/assets/update5.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
+            <state relative-caret-position="272">
+              <caret line="16" column="106" selection-start-line="16" selection-start-column="106" selection-end-line="16" selection-end-column="106" />
             </state>
           </provider>
-          <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1620">
-              <caret line="108" column="56" selection-start-line="108" selection-start-column="56" selection-end-line="120" selection-end-column="58" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/assets/update4.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9120">
-              <caret line="608" column="67" selection-end-line="610" selection-end-column="64" />
+            <state relative-caret-position="365">
+              <caret line="600" column="61" selection-start-line="600" selection-start-column="61" selection-end-line="600" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -91,7 +80,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/assets/update3.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50445">
+            <state relative-caret-position="57171">
               <caret line="3363" column="26" selection-start-line="3363" selection-start-column="26" selection-end-line="3363" selection-end-column="26" />
             </state>
           </provider>
@@ -99,18 +88,14 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/assets/dev.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8910">
-              <caret line="594" column="61" selection-start-line="594" selection-start-column="61" selection-end-line="594" selection-end-column="61" />
-            </state>
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/GlobalFunctions.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="55" column="120" selection-start-line="55" selection-start-column="120" selection-end-line="55" selection-end-column="120" />
+            <state relative-caret-position="5">
+              <caret line="47" column="4" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
               <folding>
                 <element signature="e#29#211#0" expanded="true" />
               </folding>
@@ -121,8 +106,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/filter_alert.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="55" lean-forward="true" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+            <state relative-caret-position="34">
+              <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
@@ -131,8 +116,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/MainActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
-              <caret line="587" column="26" lean-forward="true" selection-start-line="587" selection-start-column="26" selection-end-line="587" selection-end-column="26" />
+            <state relative-caret-position="222">
+              <caret line="210" column="9" selection-start-line="210" selection-start-column="9" selection-end-line="210" selection-end-column="9" />
               <folding>
                 <element signature="e#29#1005#0" expanded="true" />
               </folding>
@@ -141,10 +126,20 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/cell_item.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="34" column="48" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/assets/create_db.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102495">
-              <caret line="6833" column="40" selection-start-line="6833" selection-end-line="6833" selection-end-column="40" />
+            <state relative-caret-position="351526">
+              <caret line="20678" column="106" selection-start-line="20678" selection-start-column="106" selection-end-line="20678" selection-end-column="106" />
             </state>
           </provider>
         </entry>
@@ -161,11 +156,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>itemType</find>
-      <find>itemType =</find>
-      <find>replace</find>
-      <find>prefs.edit</find>
-      <find>switch</find>
       <find>selectedFilter</find>
       <find>accf_acc</find>
       <find>accf_car</find>
@@ -191,6 +181,11 @@
       <find>VERSio</find>
       <find>sort</find>
       <find>toLower</find>
+      <find>filter</find>
+      <find>readableDatabase</find>
+      <find>qualifier</find>
+      <find>gameValues</find>
+      <find>setupPreferences</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -212,25 +207,26 @@
         <option value="$PROJECT_DIR$/app/src/main/assets/update2.sql" />
         <option value="$PROJECT_DIR$/app/src/main/assets/update3.sql" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/cell_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/SQLReader.kt" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/assets/update4.sql" />
-        <option value="$PROJECT_DIR$/app/src/main/assets/create_db.sql" />
-        <option value="$PROJECT_DIR$/app/src/main/assets/dev.sql" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/settings_alert.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/filter_alert.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/MainActivity.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/DBHelper.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/GlobalFunctions.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/assets/create_db.sql" />
+        <option value="$PROJECT_DIR$/app/src/main/assets/update5.sql" />
+        <option value="$PROJECT_DIR$/app/src/main/assets/dev.sql" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/DBHelper.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/MainActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/cell_item.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
     <option name="width" value="1033" />
-    <option name="height" value="801" />
+    <option name="height" value="788" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -239,17 +235,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="android_ac_catalog" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -257,6 +242,28 @@
             <path>
               <item name="android_ac_catalog" type="b2602c69:ProjectViewProjectNode" />
               <item name="android_ac_catalog" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="android_ac_catalog_1" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="android_ac_catalog_1" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="android_ac_catalog_1" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
           <select />
@@ -378,11 +385,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1033" height="801" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.2305359" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.22995462" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -393,20 +400,20 @@
       <window_info id="DB Browser" order="9" weight="0.32925898" />
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.32890365" />
       <window_info anchor="bottom" id="TODO" order="1" weight="0.32890365" />
-      <window_info anchor="bottom" id="Find" order="2" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.3289689" />
       <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.4989339" weight="0.2108295" />
       <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.50319827" side_tool="true" weight="0.3156682" />
       <window_info anchor="bottom" id="Run" order="5" />
       <window_info anchor="bottom" id="Logcat" order="6" />
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.40752864" />
-      <window_info active="true" anchor="bottom" id="Build" order="9" sideWeight="0.49733475" visible="true" weight="0.30183357" />
+      <window_info anchor="bottom" id="Build" order="9" sideWeight="0.49733475" weight="0.30114567" />
       <window_info anchor="bottom" id="DB Execution Console" order="10" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Theme Preview" order="1" />
       <window_info anchor="right" id="Palette&#9;" order="2" />
       <window_info anchor="right" id="Gradle" order="3" />
-      <window_info anchor="right" id="Preview" order="4" weight="0.3383686" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.33812407" />
       <window_info anchor="right" id="Device File Explorer" order="5" weight="0.32980332" />
       <window_info anchor="right" id="Android WiFi ADB" order="6" weight="0.32946298" />
     </layout>
@@ -418,11 +425,43 @@
     <watches-manager>
       <configuration name="app">
         <watch expression="MainActivity.itemType" language="kotlin" />
+        <watch expression="cursor.count" language="kotlin" />
+        <watch expression="MainActivity.selectedTablePreferences" language="kotlin" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>MainActivity.selectedTablePreferences</expression-string>
+        <language-id>kotlin</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>selectedTablePreferences</expression-string>
+        <language-id>kotlin</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>cursor.count</expression-string>
+        <language-id>kotlin</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>cursor.isNull(0)</expression-string>
+        <language-id>kotlin</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>cursor.isNull()</expression-string>
+        <language-id>kotlin</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>cursor.position</expression-string>
+        <language-id>kotlin</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>MainActivity.itemType</expression-string>
         <language-id>kotlin</language-id>
@@ -435,26 +474,6 @@
       </expression>
       <expression>
         <expression-string>e</expression-string>
-        <language-id>kotlin</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>fileStr</expression-string>
-        <language-id>kotlin</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>itemType</expression-string>
-        <language-id>kotlin</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>str</expression-string>
-        <language-id>kotlin</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>line</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -481,14 +500,6 @@
           <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/cell_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="48" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/spinner_layout.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -547,58 +558,6 @@
       </provider>
       <provider editor-type-id="android-manifest" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/assets/update4.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9120">
-          <caret line="608" column="67" selection-end-line="610" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/assets/update3.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50445">
-          <caret line="3363" column="26" selection-start-line="3363" selection-start-column="26" selection-end-line="3363" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/assets/dev.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8910">
-          <caret line="594" column="61" selection-start-line="594" selection-start-column="61" selection-end-line="594" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/assets/create_db.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102495">
-          <caret line="6833" column="40" selection-start-line="6833" selection-end-line="6833" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/filter_alert.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="55" lean-forward="true" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/settings_alert.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1620">
-          <caret line="108" column="56" selection-start-line="108" selection-start-column="56" selection-end-line="120" selection-end-column="58" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
@@ -606,30 +565,114 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/DBHelper.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/settings_alert.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="221" column="97" selection-start-line="221" selection-start-column="79" selection-end-line="221" selection-end-column="97" />
+        <state relative-caret-position="85">
+          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1836">
+          <caret line="108" column="56" selection-start-line="108" selection-start-column="56" selection-end-line="120" selection-end-column="58" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/database/sqlite/SQLiteOpenHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="498" selection-start-line="498" selection-end-line="498" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/assets/update3.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57171">
+          <caret line="3363" column="26" selection-start-line="3363" selection-start-column="26" selection-end-line="3363" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/assets/dev.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/filter_alert.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/assets/create_db.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351526">
+          <caret line="20678" column="106" selection-start-line="20678" selection-start-column="106" selection-end-line="20678" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/GlobalFunctions.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5">
+          <caret line="47" column="4" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
+          <folding>
+            <element signature="e#29#211#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/assets/update4.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="600" column="61" selection-start-line="600" selection-start-column="61" selection-end-line="600" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/assets/update5.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="106" selection-start-line="16" selection-start-column="106" selection-end-line="16" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/app/ActivityThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="3443" selection-start-line="3443" selection-end-line="3443" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/database/sqlite/SQLiteDatabase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="1897" selection-start-line="1897" selection-end-line="1897" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/MainActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="587" column="26" lean-forward="true" selection-start-line="587" selection-start-column="26" selection-end-line="587" selection-end-column="26" />
+        <state relative-caret-position="222">
+          <caret line="210" column="9" selection-start-line="210" selection-start-column="9" selection-end-line="210" selection-end-column="9" />
           <folding>
             <element signature="e#29#1005#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/GlobalFunctions.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/cell_item.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="34" column="48" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/DBHelper.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="55" column="120" selection-start-line="55" selection-start-column="120" selection-end-line="55" selection-end-column="120" />
-          <folding>
-            <element signature="e#29#211#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="103">
+          <caret line="542" selection-start-line="542" selection-end-line="542" />
         </state>
       </provider>
     </entry>

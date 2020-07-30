@@ -1,0 +1,17 @@
+insert into acnh_houseware values(1452, 0, 'log chair', 'unorderable', '960', 'Crafting', 'garden', 'living room', 'log');
+update acgc_shirt set "Name" = 'Houndstooth Tee' where "Index" = 257;
+insert into acgc_carpet values(69, 0, 'Backyard Lawn', 'orderable', 'Grp ?');
+update acnh_houseware set "Name" = 'study chair (Natural)' where "Index" = 1393;
+update acnh_houseware set "Name" = 'study chair (Light brown)' where "Index" = 1394;
+update acnh_houseware set "Name" = 'study chair (Dark brown)' where "Index" = 1395;
+update acnh_houseware set "Name" = 'study chair (White)' where "Index" = 1396;
+update acnh_houseware set "Name" = 'study desk (Natural)' where "Index" = 1397;
+update acnh_houseware set "Name" = 'study desk (Light brown)' where "Index" = 1398;
+update acnh_houseware set "Name" = 'study desk (Dark brown)' where "Index" = 1399;
+update acnh_houseware set "Name" = 'study desk (White)' where "Index" = 1400;
+update acnh_wall_mounted set "Name" = 'study poster (Alphabet)' where "Index" = 309;
+update acnh_wall_mounted set "Name" = 'study poster (Multiplication tables)' where "Index" = 310;
+update acnh_wall_mounted set "Name" = 'study poster (Periodic table)' where "Index" = 311;
+update acnh_wall_mounted set "Name" = 'study poster (Constellations)' where "Index" = 312;
+drop table if exists preferences;
+create table preferences (table_name varchar(127) primary key, selected_filter int, "from" varchar (127));

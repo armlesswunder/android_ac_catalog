@@ -20675,3 +20675,5 @@ insert into acnh_feb_sea_creature values (40);
 insert into acnh_oct_sea_creature values (40);
 insert into acnh_nov_sea_creature values (40);
 insert into acnh_dec_sea_creature values (40);
+drop table if exists preferences;
+create table preferences (table_name varchar(127) primary key, selected_filter int, "from" varchar (127));
