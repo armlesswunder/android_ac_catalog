@@ -299,6 +299,67 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         }
     }
 
+    fun getFromData(tableName: String): List<String> {
+        val db = this.readableDatabase
+        val myDataset = emptySet<String>().toMutableSet()
+
+        if (tableName == "acnh_all_clothing") {
+
+            for (table in ACNH_ALL_CLOTHING_TABLES) {
+                val cursor = getFromCursorData(table, db)
+
+                cursor.moveToFirst()
+                do {
+                    for (column in cursor.columnNames) {
+                        myDataset.add(cursor.getString(cursor.getColumnIndex(column)))
+                    }
+                } while (cursor.moveToNext())
+
+                cursor.close()
+            }
+        }
+        else if (tableName == "acnh_all_furniture") {
+
+            for (table in ACNH_ALL_FURNITURE_TABLES) {
+                val cursor = getFromCursorData(table, db)
+
+                cursor.moveToFirst()
+                do {
+                    for (column in cursor.columnNames) {
+                        myDataset.add(cursor.getString(cursor.getColumnIndex(column)))
+                    }
+                } while (cursor.moveToNext())
+
+                cursor.close()
+            }
+        }
+        else {
+            val cursor = getFromCursorData(tableName, db)
+
+            cursor.moveToFirst()
+            do {
+                for (column in cursor.columnNames) {
+                     myDataset.add(cursor.getString(cursor.getColumnIndex(column)))
+                }
+            } while (cursor.moveToNext())
+
+            cursor.close()
+        }
+
+        return myDataset.toMutableList().sortedWith(compareBy { it.toLowerCase().replace("-", " ") })
+    }
+
+    fun getFromCursorData(tableName: String, db: SQLiteDatabase): Cursor {
+        var cursor: Cursor? = null
+        try {
+            cursor = db.rawQuery("select distinct \"From\" from $tableName;", null)
+        }
+        catch(e: Throwable) {
+            println("Error getting cursor data: $e")
+        }
+        return cursor!!
+    }
+
     fun getSeasonData(gameName: String, tableName: String, season: String): MutableList<MutableMap<String, String>> {
         val cursor = getCursorData(gameName, tableName, season)
         val myDataset = emptyList<MutableMap<String, String>>().toMutableList()
@@ -540,7 +601,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
 
     fun setPrefs(tableName: String, from: String, selectedFilter: String): MutableMap<String, String>? {
         val db = this.writableDatabase
-        val sqlStr = ("update preferences set \"from\" = '$from', selected_filter = $selectedFilter where table_name = '$tableName';")
+        val sqlStr = ("update preferences set \"from\" = '${from.replace("'", "''")}', selected_filter = $selectedFilter where table_name = '$tableName';")
         db.execSQL(sqlStr)
 
         var cursor: Cursor? = null

@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         lateinit var myDataset: MutableList<MutableMap<String, String>>
         lateinit var masterDataset: MutableList<MutableMap<String, String>>
+        lateinit var fromDataset: List<String>
         var name = ""
         var from = ""
         var useCurrentSeason = false
@@ -254,7 +255,7 @@ class MainActivity : AppCompatActivity() {
     fun setPreferences(db: DBHelper) {
         val tableName = (qualifier + itemType).replace(" ", "_")
         val map = db.setPrefs(tableName, from, selectedFilter.toString())
-        var i = 0;
+        var i = 0
         for (prefs in tablePreferences) {
             if (prefs["table_name"] == tableName) {
                 break
@@ -308,6 +309,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 getData(db)
+
             }
             if (started) {
                 setupPreferences()
@@ -358,9 +360,33 @@ class MainActivity : AppCompatActivity() {
             setView(layout)
 
             val seasonLbl = layout.findViewById<TextView>(R.id.seasonLbl)
-            val fromSearchBar = layout.findViewById<EditText>(R.id.fromSearchBar)
+            val fromSearchBar = layout.findViewById<AutoCompleteTextView>(R.id.fromSearchBar)
             val seasonSpinner = layout.findViewById<Spinner>(R.id.seasonSpinner)
             val selectedSpinner = layout.findViewById<Spinner>(R.id.selectedSpinner)
+            val dropDownArrowFrom = layout.findViewById<ImageView>(R.id.btnDropDownFrom)
+            var dda = true
+
+            if (!fromDataset.isEmpty()) {
+                dropDownArrowFrom.visibility = View.VISIBLE
+                dropDownArrowFrom.setOnClickListener {
+                    if (dda) {
+                        fromSearchBar.showDropDown()
+                    }
+                    else {
+                        fromSearchBar.dismissDropDown()
+                    }
+                    dda = !dda
+                }
+                fromSearchBar.setAdapter(
+                    ArrayAdapter<String>(
+                        this@MainActivity,
+                        android.R.layout.simple_dropdown_item_1line,
+                        fromDataset
+                    )
+                )
+            } else {
+                dropDownArrowFrom.visibility = View.GONE
+            }
 
             val seasonAdapter = ArrayAdapter<String>(
                 this@MainActivity,

@@ -1,0 +1,12 @@
+update acnh_wall_mounted set "From" = 'Nook''s Cranny' where "Index" = 96;
+update acnh_wall_mounted set "From" = 'Nook''s Cranny' where "Index" = 97;
+update acnh_wall_mounted set "From" = 'Nook''s Cranny' where "Index" = 98;
+update acnh_wall_mounted set "From" = 'Nook''s Cranny' where "Index" = 99;
+update acnh_wall_mounted set "Concept1" = 'None' where "Index" = 96;
+update acnh_wall_mounted set "Concept1" = 'None' where "Index" = 97;
+update acnh_wall_mounted set "Concept1" = 'None' where "Index" = 98;
+update acnh_wall_mounted set "Concept1" = 'None' where "Index" = 99;
+update acnh_wall_mounted set "Status" = 'orderable' where "Index" = 96;
+update acnh_wall_mounted set "Status" = 'orderable' where "Index" = 97;
+update acnh_wall_mounted set "Status" = 'orderable' where "Index" = 98;
+update acnh_wall_mounted set "Status" = 'orderable' where "Index" = 99;

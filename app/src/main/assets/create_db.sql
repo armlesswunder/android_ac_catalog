@@ -19165,10 +19165,10 @@ insert into acnh_wall_mounted values(92, 0, 'fish print (Squid)', 'unorderable',
 insert into acnh_wall_mounted values(93, 0, 'fish print (Black bass)', 'unorderable', '700', 'Fishing Tourney', 'ocean', 'living room', 'None');
 insert into acnh_wall_mounted values(94, 0, 'fish print (Carp)', 'unorderable', '700', 'Fishing Tourney', 'ocean', 'living room', 'None');
 insert into acnh_wall_mounted values(95, 0, 'fish print (Giant snakehead)', 'unorderable', '700', 'Fishing Tourney', 'ocean', 'living room', 'None');
-insert into acnh_wall_mounted values(96, 0, 'fishing-boat flag', 'unorderable', '2200', '2x1.5 ', '1.0.0', 'ocean', 'None');
-insert into acnh_wall_mounted values(97, 0, 'fishing-boat flag', 'unorderable', '2200', '2x1.5 ', '1.0.0', 'ocean', 'None');
-insert into acnh_wall_mounted values(98, 0, 'fishing-boat flag', 'unorderable', '2200', '2x1.5 ', '1.0.0', 'ocean', 'None');
-insert into acnh_wall_mounted values(99, 0, 'fishing-boat flag', 'unorderable', '2200', '2x1.5 ', '1.0.0', 'ocean', 'None');
+insert into acnh_wall_mounted values(96, 0, 'fishing-boat flag', 'orderable', '2200', 'Nook''s Cranny', 'None', 'ocean', 'None');
+insert into acnh_wall_mounted values(97, 0, 'fishing-boat flag', 'orderable', '2200', 'Nook''s Cranny', 'None', 'ocean', 'None');
+insert into acnh_wall_mounted values(98, 0, 'fishing-boat flag', 'orderable', '2200', 'Nook''s Cranny', 'None', 'ocean', 'None');
+insert into acnh_wall_mounted values(99, 0, 'fishing-boat flag', 'orderable', '2200', 'Nook''s Cranny', 'None', 'ocean', 'None');
 insert into acnh_wall_mounted values(100, 0, 'floral swag', 'unorderable', '200', 'Crafting', 'living room', 'None', 'None');
 insert into acnh_wall_mounted values(101, 0, 'formal paper (Brown)', 'orderable', '620', 'Nook''s Cranny', 'school', 'den', 'None');
 insert into acnh_wall_mounted values(102, 0, 'formal paper (Light brown)', 'orderable', '620', 'Nook''s Cranny', 'school', 'den', 'None');

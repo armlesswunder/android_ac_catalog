@@ -23,6 +23,11 @@ fun getData(db: DBHelper) {
             db.getSeasonData(MainActivity.qualifier, MainActivity.itemType.replace(" ", "_"), MainActivity.seasonValues[MainActivity.seasonIndex])
         MainActivity.masterDataset = MainActivity.myDataset
     }
+
+    MainActivity.fromDataset = db.getFromData(MainActivity.qualifier + MainActivity.itemType.replace(" ", "_"))
+    if (MainActivity.fromDataset.size == 1 && MainActivity.fromDataset.contains("From")) {
+        MainActivity.fromDataset = emptyList()
+    }
 }
 
 fun hideKeyboard(activity: AppCompatActivity) {

@@ -15,3 +15,15 @@ update acnh_wall_mounted set "Name" = 'study poster (Periodic table)' where "Ind
 update acnh_wall_mounted set "Name" = 'study poster (Constellations)' where "Index" = 312;
 drop table if exists preferences;
 create table preferences (table_name varchar(127) primary key, selected_filter int, "from" varchar (127));
+update acnh_wall_mounted set "From" = 'Nook''s Cranny' where "Index" = 96;
+update acnh_wall_mounted set "From" = 'Nook''s Cranny' where "Index" = 97;
+update acnh_wall_mounted set "From" = 'Nook''s Cranny' where "Index" = 98;
+update acnh_wall_mounted set "From" = 'Nook''s Cranny' where "Index" = 99;
+update acnh_wall_mounted set "Concept1" = 'None' where "Index" = 96;
+update acnh_wall_mounted set "Concept1" = 'None' where "Index" = 97;
+update acnh_wall_mounted set "Concept1" = 'None' where "Index" = 98;
+update acnh_wall_mounted set "Concept1" = 'None' where "Index" = 99;
+update acnh_wall_mounted set "Status" = 'orderable' where "Index" = 96;
+update acnh_wall_mounted set "Status" = 'orderable' where "Index" = 97;
+update acnh_wall_mounted set "Status" = 'orderable' where "Index" = 98;
+update acnh_wall_mounted set "Status" = 'orderable' where "Index" = 99;
