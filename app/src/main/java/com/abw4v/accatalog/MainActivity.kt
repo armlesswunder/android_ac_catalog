@@ -93,36 +93,33 @@ class MainActivity : AppCompatActivity() {
             setupViews(prefs)
         }
         else {
-
             //create read/write directory
             val fileName = "acc_backup.sql"
             val file = File(this@MainActivity.externalCacheDir!!.absolutePath, fileName)
-
-            val alert: AlertDialog
-            val alertBuilder = AlertDialog.Builder(this)
-            var btn: Button?
-            alert = alertBuilder.apply {
-                val layout = LayoutInflater.from(context).inflate(R.layout.loading_alert, null)
-                setView(layout)
-                val msg = layout.findViewById<TextView>(R.id.loadingMsg)
-                btn = layout.findViewById<Button>(R.id.button)
-                msg.text = "This App needs to run First-Time setup. This takes approximately 10 seconds. DO NOT close the application while this is happening."
-                setCancelable(false)
-                setOnDismissListener {
-                    setupViews(prefs)
-                    prefs.edit().putBoolean("first_time", false).commit()
-                    firstTime = false
-                }
-            }.show()
-            btn?.setOnClickListener {
-                alert.dismiss()
-            }
         }
     }
 
     override fun onResume() {
         super.onResume()
         hideKeyboard(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (firstTime) {
+            val toast = Toast.makeText(this, "First Time setup, don't close the app.", Toast.LENGTH_LONG)
+            toast.show()
+            Timer().schedule(object : TimerTask() {
+                override fun run() {
+                    runOnUiThread({
+                        val prefs = getSharedPreferences("default", Context.MODE_PRIVATE)
+                        setupViews(prefs)
+                        prefs.edit().putBoolean("first_time", false).commit()
+                        firstTime = false
+                    })
+                }
+            }, 1000)
+        }
     }
 
     fun setupViews(prefs: SharedPreferences) {

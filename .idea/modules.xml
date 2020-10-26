@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AC Catalog.iml" filepath="$PROJECT_DIR$/AC Catalog.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/android_ac_catalog.iml" filepath="$PROJECT_DIR$/.idea/android_ac_catalog.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AC_Catalog.iml" filepath="$PROJECT_DIR$/.idea/modules/AC_Catalog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AC_Catalog.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AC_Catalog.app.iml" />
     </modules>
   </component>
 </project>
