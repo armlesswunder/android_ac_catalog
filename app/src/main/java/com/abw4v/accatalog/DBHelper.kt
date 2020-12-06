@@ -5,7 +5,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 7) {
+class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 8) {
 
     companion object {
         val DATABASE_NAME = "catalog.db"
@@ -175,6 +175,26 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         }
     }
 
+    fun update7(db: SQLiteDatabase) {
+
+        val sqlReader = SQLReader()
+        var sqlStr = sqlReader.getSQLDataFromAssets(context, "update7.sql")
+        var sqlArr = sqlStr?.split("\n")
+        var lineNo = 1
+        var errNo = 0
+
+        for (str in sqlArr!!) {
+            try {
+                db.execSQL(str)
+                lineNo++
+            } catch(e: Throwable) {
+                lineNo++
+                errNo++
+                println("Error #$errNo on line $lineNo using sql statement: $str")
+            }
+        }
+    }
+
     fun executeSQLFromFile(sqlStr: String) {
 
         val db = this.writableDatabase
@@ -216,6 +236,9 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         }
         if (oldVersion < 7) {
             update6(db)
+        }
+        if (oldVersion < 7) {
+            update7(db)
         }
 
         setupPreferences(db)
