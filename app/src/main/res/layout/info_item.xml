@@ -29,8 +29,8 @@
         android:layout_height="2dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:background="#F44336"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:background="@color/textColor"
+        android:backgroundTint="@color/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

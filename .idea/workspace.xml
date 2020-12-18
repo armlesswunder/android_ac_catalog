@@ -10,26 +10,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c854f0e-d1f0-4dc7-b6c8-23fc4d4462c5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/simple_spinner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/values-night/colors.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/create_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/create_db.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/DBHelper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/DBHelper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-anydpi/ic_filter.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-anydpi/ic_filter.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-anydpi/ic_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-anydpi/ic_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/cell_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/cell_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/explain_filter_alert.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/explain_filter_alert.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/filter_alert.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/filter_alert.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/info_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/info_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/loading_alert.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/loading_alert.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/settings_alert.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/settings_alert.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/spinner_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/spinner_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/constraintlayout/group-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/constraintlayout/group-index.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/core/group-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/core/group-index.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/recyclerview/group-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/recyclerview/group-index.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_2_API_29]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -47,45 +67,13 @@
       <list>
         <option value="Kotlin File" />
         <option value="layoutResourceFile_vertical" />
+        <option value="valueResourceFile" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>useSeasonData</find>
-      <find>fish</find>
-      <find>useCurrentSeason =</find>
-      <find>useCurrentSeason</find>
-      <find>sa</find>
-      <find>seas</find>
-      <find>faqURL</find>
-      <find>useCritterWarningColors =</find>
-      <find>insert into acnl_seafood values(4, 0, 'A</find>
-      <find>onAc</find>
-      <find>VERSio</find>
-      <find>sort</find>
-      <find>toLower</find>
-      <find>filter</find>
-      <find>readableDatabase</find>
-      <find>qualifier</find>
-      <find>gameValues</find>
-      <find>setupPreferences</find>
-      <find>getCursorData</find>
-      <find>from</find>
-      <find>getFrom</find>
-      <find>myDataset</find>
-      <find>filterBt</find>
-      <find>rotateDDA</find>
-      <find>TextWatcher</find>
-      <find>fishing boat</find>
-      <find>setPref</find>
-      <find>devBtn</find>
-      <find>fishing-boat</find>
-      <find>update</find>
-    </findStrings>
-  </component>
   <component name="GenerateSignedApkSettings">
-    <option name="KEY_STORE_PATH" value="C:\Users\000ab\Desktop\ac catalog release files\upload-keystore.jks" />
+    <option name="KEY_STORE_PATH" value="/Volumes/THUMB DRIVE/ac catalog release files/upload-keystore.jks" />
     <option name="KEY_ALIAS" value="key0" />
     <option name="REMEMBER_PASSWORDS" value="true" />
     <option name="BUILD_TARGET_KEY" value="apk" />
@@ -100,12 +88,13 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ApkExportedModule" value="AC_Catalog.app" />
     <property name="DEBUGGABLE_DEVICE" value="samsung-samsung_sm_g930a-a11b66b2" />
     <property name="DEBUGGABLE_PROCESS" value="com.abw4v.accatalog" />
     <property name="DEBUGGER_ID" value="Auto" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_29" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-12-06T14:02:35.510Z" />
-    <property name="ExportApk.ApkPath" value="C:\Users\000ab\Documents" />
+    <property name="ExportApk.ApkPath" value="/Volumes/THUMB DRIVE/ac catalog release files" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="ExportApk.SignV1" value="true" />
     <property name="ExportApk.SignV2" value="true" />
@@ -213,30 +202,38 @@
     </state>
     <state x="100" y="123" width="787" height="598" key="AVDManager/0.23.1440.798@0.23.1440.798" timestamp="1603711317423" />
     <state x="377" y="126" width="787" height="598" key="AVDManager/0.23.1440.804@0.23.1440.804" timestamp="1603712482257" />
-    <state width="984" height="204" key="GridCell.Tab.0.bottom" timestamp="1603713915659">
-      <screen x="0" y="23" width="1440" height="804" />
+    <state x="548" y="265" key="AndroidCreateResourceFileDialog" timestamp="1608325377998">
+      <screen x="0" y="23" width="1920" height="960" />
+    </state>
+    <state x="548" y="265" key="AndroidCreateResourceFileDialog/0.23.1920.960@0.23.1920.960" timestamp="1608325377998" />
+    <state width="1878" height="258" key="GridCell.Tab.0.bottom" timestamp="1608323928081">
+      <screen x="0" y="23" width="1920" height="960" />
     </state>
     <state width="806" height="204" key="GridCell.Tab.0.bottom/0.23.1440.801@0.23.1440.801" timestamp="1603712158514" />
     <state width="984" height="204" key="GridCell.Tab.0.bottom/0.23.1440.804@0.23.1440.804" timestamp="1603713915659" />
     <state width="958" height="204" key="GridCell.Tab.0.bottom/0.23.1440.806@0.23.1440.806" timestamp="1603713776937" />
-    <state width="984" height="204" key="GridCell.Tab.0.center" timestamp="1603713915656">
-      <screen x="0" y="23" width="1440" height="804" />
+    <state width="1878" height="258" key="GridCell.Tab.0.bottom/0.23.1920.960@0.23.1920.960" timestamp="1608323928081" />
+    <state width="1878" height="258" key="GridCell.Tab.0.center" timestamp="1608323928081">
+      <screen x="0" y="23" width="1920" height="960" />
     </state>
     <state width="806" height="204" key="GridCell.Tab.0.center/0.23.1440.801@0.23.1440.801" timestamp="1603712158513" />
     <state width="984" height="204" key="GridCell.Tab.0.center/0.23.1440.804@0.23.1440.804" timestamp="1603713915656" />
     <state width="958" height="204" key="GridCell.Tab.0.center/0.23.1440.806@0.23.1440.806" timestamp="1603713776936" />
-    <state width="984" height="204" key="GridCell.Tab.0.left" timestamp="1603713915656">
-      <screen x="0" y="23" width="1440" height="804" />
+    <state width="1878" height="258" key="GridCell.Tab.0.center/0.23.1920.960@0.23.1920.960" timestamp="1608323928081" />
+    <state width="1878" height="258" key="GridCell.Tab.0.left" timestamp="1608323928080">
+      <screen x="0" y="23" width="1920" height="960" />
     </state>
     <state width="806" height="204" key="GridCell.Tab.0.left/0.23.1440.801@0.23.1440.801" timestamp="1603712158513" />
     <state width="984" height="204" key="GridCell.Tab.0.left/0.23.1440.804@0.23.1440.804" timestamp="1603713915656" />
     <state width="958" height="204" key="GridCell.Tab.0.left/0.23.1440.806@0.23.1440.806" timestamp="1603713776936" />
-    <state width="984" height="204" key="GridCell.Tab.0.right" timestamp="1603713915657">
-      <screen x="0" y="23" width="1440" height="804" />
+    <state width="1878" height="258" key="GridCell.Tab.0.left/0.23.1920.960@0.23.1920.960" timestamp="1608323928080" />
+    <state width="1878" height="258" key="GridCell.Tab.0.right" timestamp="1608323928081">
+      <screen x="0" y="23" width="1920" height="960" />
     </state>
     <state width="806" height="204" key="GridCell.Tab.0.right/0.23.1440.801@0.23.1440.801" timestamp="1603712158513" />
     <state width="984" height="204" key="GridCell.Tab.0.right/0.23.1440.804@0.23.1440.804" timestamp="1603713915657" />
     <state width="958" height="204" key="GridCell.Tab.0.right/0.23.1440.806@0.23.1440.806" timestamp="1603713776937" />
+    <state width="1878" height="258" key="GridCell.Tab.0.right/0.23.1920.960@0.23.1920.960" timestamp="1608323928081" />
     <state width="984" height="204" key="GridCell.Tab.1.bottom" timestamp="1603713911769">
       <screen x="0" y="23" width="1440" height="804" />
     </state>
@@ -257,6 +254,10 @@
     </state>
     <state width="984" height="204" key="GridCell.Tab.1.right/0.23.1440.804@0.23.1440.804" timestamp="1603713911769" />
     <state width="958" height="204" key="GridCell.Tab.1.right/0.23.1440.806@0.23.1440.806" timestamp="1603713776938" />
+    <state x="652" y="258" width="615" height="490" key="find.popup" timestamp="1608324080723">
+      <screen x="0" y="23" width="1920" height="960" />
+    </state>
+    <state x="652" y="258" width="615" height="490" key="find.popup/0.23.1920.960@0.23.1920.960" timestamp="1608324080723" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

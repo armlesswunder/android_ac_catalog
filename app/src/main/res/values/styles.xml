@@ -6,6 +6,30 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="alertDialogTheme">@style/AlertDialog</item>
+        <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>
+        <item name="android:navigationBarColor">@color/background</item>
     </style>
 
+    <style name="SpinnerItem">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:background">@color/background</item>
+    </style>
+    <style name="SpinnerDropDownItem">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:background">@color/background</item>
+    </style>
+
+    <style name="AlertDialog"  parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColorPrimary">@color/textColor</item>
+        <item name="android:background">@color/background</item>
+    </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 </resources>

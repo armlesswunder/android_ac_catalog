@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/textColor"
         android:text="Filter"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -32,6 +32,9 @@
             android:completionThreshold="1"
             android:dropDownHeight="150dp"
             android:hint="From"
+            android:backgroundTint="@color/textColor"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
             android:imeOptions="actionDone"
             android:singleLine="true"
             app:layout_constraintEnd_toStartOf="@+id/btnDropDownFrom"
@@ -43,7 +46,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/drop_down_arrow"
-            android:tint="@color/colorPrimaryDark"
+            android:tint="@color/textColor"
             android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/fromSearchBar"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,6 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsLbl" />
 
@@ -85,6 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seasonSpinner" />
 

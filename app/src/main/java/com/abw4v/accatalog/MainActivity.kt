@@ -94,9 +94,15 @@ class MainActivity : AppCompatActivity() {
         }
         else {
             //create read/write directory
-            val fileName = "acc_backup.sql"
-            val file = File(this@MainActivity.externalCacheDir!!.absolutePath, fileName)
+            val file = File(this@MainActivity.externalCacheDir!!.absolutePath, getFileName())
         }
+    }
+
+    fun getFileName(): String {
+        val month = Calendar.getInstance().get(Calendar.MONTH) + 1
+        val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        val year = Calendar.getInstance().get(Calendar.YEAR)
+        return "acc_backup_${month}_${day}_${year}.sql"
     }
 
     override fun onResume() {
@@ -166,8 +172,8 @@ class MainActivity : AppCompatActivity() {
         gameSpinner.adapter = gameAdapter
         tableSpinner.adapter = tableAdapter
 
-        gameAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
-        tableAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+        gameAdapter.setDropDownViewResource(R.layout.simple_spinner)
+        tableAdapter.setDropDownViewResource(R.layout.simple_spinner)
 
         gameSpinner.setSelection(qualifierIndex)
         tableSpinner.setSelection(tableIndex)
@@ -335,7 +341,7 @@ class MainActivity : AppCompatActivity() {
                 tableDisplay
             )
             tableSpinner.adapter = tableAdapter
-            tableAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+            tableAdapter.setDropDownViewResource(R.layout.simple_spinner)
             if (tableIndex >= tableDisplay.size)
                 tableIndex = 0
 
@@ -377,7 +383,7 @@ class MainActivity : AppCompatActivity() {
                 fromSearchBar.setAdapter(
                     ArrayAdapter<String>(
                         this@MainActivity,
-                        android.R.layout.simple_dropdown_item_1line,
+                        R.layout.simple_spinner,
                         fromDataset
                     )
                 )
@@ -392,7 +398,7 @@ class MainActivity : AppCompatActivity() {
             )
 
             seasonSpinner.adapter = seasonAdapter
-            seasonAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+            seasonAdapter.setDropDownViewResource(R.layout.simple_spinner)
 
             val selectedAdapter = ArrayAdapter<String>(
                 this@MainActivity,
@@ -401,7 +407,7 @@ class MainActivity : AppCompatActivity() {
             )
 
             selectedSpinner.adapter = selectedAdapter
-            selectedAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+            selectedAdapter.setDropDownViewResource(R.layout.simple_spinner)
             selectedSpinner.setSelection(selectedFilter)
 
             fromSearchBar.setText(from)
@@ -528,7 +534,7 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "text/*"
-            putExtra(Intent.EXTRA_TITLE, "acc_backup.sql")
+            putExtra(Intent.EXTRA_TITLE, getFileName())
             putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
         }
         startActivityForResult(intent, CREATE_FILE)
@@ -546,7 +552,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
         if (requestCode == CREATE_FILE && resultCode == Activity.RESULT_OK) {
             resultData?.data?.also { outputUri ->
-                val fileName = "acc_backup.sql"
+                val fileName = getFileName()
                 val out = openFileOutput(fileName, Context.MODE_PRIVATE)
                 out.write(fileStr.toByteArray(Charset.defaultCharset()))
                 out.close()
@@ -632,7 +638,7 @@ class RecViewAdapter(private val values : MutableList<MutableMap<String, String>
         else if (useCritterWarningColors && item.containsKey("GonePreviousMonth") && item["GonePreviousMonth"].equals("true")) {
             holder.layoutBackground.setCardBackgroundColor(context.getColor(R.color.lightGreen))
         } else {
-            holder.layoutBackground.setCardBackgroundColor(context.getColor(R.color.colorWhite))
+            holder.layoutBackground.setCardBackgroundColor(context.getColor(R.color.background))
         }
 
         holder.checkBtn.setOnClickListener {

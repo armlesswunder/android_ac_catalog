@@ -8,4 +8,4 @@
     android:textSize="18sp"
     android:textStyle="bold"
     android:gravity="center"
-    android:textColor="@color/colorWhite" />
+    android:textColor="@color/textColorActionBar" />

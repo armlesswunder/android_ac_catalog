@@ -5,7 +5,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 8) {
+class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 9) {
 
     companion object {
         val DATABASE_NAME = "catalog.db"
@@ -237,7 +237,8 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         if (oldVersion < 7) {
             update6(db)
         }
-        if (oldVersion < 7) {
+        //skip one bc versions got messed up in 12/6/2020 release
+        if (oldVersion < 9) {
             update7(db)
         }
 

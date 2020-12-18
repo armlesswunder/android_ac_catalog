@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="Settings"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/textColor"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="Use current date"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsLbl" />
 
@@ -40,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="Critter warning colors"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/useCurrentDate" />
 
@@ -71,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="FAQ"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@id/saveBtn" />
@@ -82,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="Guide"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/saveBtn" />
