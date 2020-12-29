@@ -10,6 +10,7 @@
         <item name="alertDialogTheme">@style/AlertDialog</item>
         <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>
+        <item name="android:navigationBarColor">@color/background</item>
     </style>
 
     <style name="SpinnerItem">
