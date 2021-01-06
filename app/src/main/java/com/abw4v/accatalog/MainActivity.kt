@@ -88,6 +88,7 @@ class MainActivity : AppCompatActivity() {
         getDefaults(prefs)
         getThisSeason()
         progressBar = findViewById<ProgressBar>(R.id.progressBar)
+        progressBar.visibility = View.VISIBLE
 
         if (!firstTime) {
             setupViews(prefs)
@@ -117,12 +118,12 @@ class MainActivity : AppCompatActivity() {
             toast.show()
             Timer().schedule(object : TimerTask() {
                 override fun run() {
-                    runOnUiThread({
+                    runOnUiThread {
                         val prefs = getSharedPreferences("default", Context.MODE_PRIVATE)
                         setupViews(prefs)
                         prefs.edit().putBoolean("first_time", false).commit()
                         firstTime = false
-                    })
+                    }
                 }
             }, 1000)
         }
