@@ -96,7 +96,7 @@
         android:layout_margin="16dp"
         android:text="Dev"
         android:textColor="@color/colorAccent"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@id/faqBtn" />

@@ -9,6 +9,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
 
     companion object {
         val DATABASE_NAME = "catalog.db"
+        val ACNL_ALL_CLOTHING_TABLES = arrayOf("acnl_accessory", "acnl_bottom", "acnl_dress", "acnl_feet", "acnl_hat", "acnl_shirt", "acnl_wet_suit")
         val ACNH_ALL_CLOTHING_TABLES = arrayOf("acnh_accessory", "acnh_bag", "acnh_bottom", "acnh_dress", "acnh_headwear", "acnh_shoe", "acnh_sock", "acnh_top", "acnh_other_clothing")
         val ACNH_ALL_FURNITURE_TABLES = arrayOf("acnh_houseware", "acnh_misc", "acnh_wall_mounted")
     }
@@ -38,7 +39,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
     fun recreate() {
         val db = this.writableDatabase
         val sqlReader = SQLReader()
-        var sqlStr = sqlReader.getSQLDataFromAssets(context, "dev.sql")
+        var sqlStr = sqlReader.getSQLDataFromAssets(context, "update8.sql")
         var sqlArr = sqlStr?.split("\n")
         var lineNo = 1
         var errNo = 0
@@ -53,6 +54,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
                 println("Error #$errNo on line $lineNo using sql statement: $str")
             }
         }
+        setupPreferences(db)
     }
 
     fun update1(db: SQLiteDatabase) {
@@ -286,7 +288,26 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
     fun getData(tableName: String): MutableList<MutableMap<String, String>> {
         val myDataset = emptyList<MutableMap<String, String>>().toMutableList()
 
-        if (tableName == "acnh_all_clothing") {
+        if (tableName == "acnl_all_clothing") {
+
+            for (table in ACNL_ALL_CLOTHING_TABLES) {
+                val cursor = getCursorData(table)
+
+                cursor.moveToFirst()
+                do {
+                    var map = emptyMap<String, String>().toMutableMap()
+                    for (column in cursor.columnNames) {
+                        map[column] = cursor.getString(cursor.getColumnIndex(column))
+                    }
+                    map["Type"] = table
+                    myDataset.add(map)
+                } while (cursor.moveToNext())
+
+                cursor.close()
+            }
+            return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase()!!.replace("-", " ") }).toMutableList()
+        }
+        else if (tableName == "acnh_all_clothing") {
 
             for (table in ACNH_ALL_CLOTHING_TABLES) {
                 val cursor = getCursorData(table)
@@ -350,7 +371,22 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         val db = this.readableDatabase
         val myDataset = emptySet<String>().toMutableSet()
 
-        if (tableName == "acnh_all_clothing") {
+        if (tableName == "acnl_all_clothing") {
+
+            for (table in ACNL_ALL_CLOTHING_TABLES) {
+                val cursor = getFromCursorData(table, db)
+
+                cursor.moveToFirst()
+                do {
+                    for (column in cursor.columnNames) {
+                        myDataset.add(cursor.getString(cursor.getColumnIndex(column)))
+                    }
+                } while (cursor.moveToNext())
+
+                cursor.close()
+            }
+        }
+        else if (tableName == "acnh_all_clothing") {
 
             for (table in ACNH_ALL_CLOTHING_TABLES) {
                 val cursor = getFromCursorData(table, db)
@@ -463,7 +499,9 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
             arrValues.add(cursor.getString(0).replace("_", " "))
         } while (cursor.moveToNext())
         cursor.close()
-        if (tableName == "acnh_table") {
+        if (tableName == "acnl_table") {
+            arrValues.add(0, ("all_clothing").replace("_", " "))
+        } else if (tableName == "acnh_table") {
             arrValues.add(0, ("all_clothing").replace("_", " "))
             arrValues.add(0, ("all_furniture").replace("_", " "))
         }
@@ -479,7 +517,9 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
             arrValues.add(cursor.getString(0).replace("_", " "))
         } while (cursor.moveToNext())
         cursor.close()
-        if (tableName == "acnh_table") {
+        if (tableName == "acnl_table") {
+            arrValues.add(0, ("all_clothing").replace("_", " "))
+        } else if (tableName == "acnh_table") {
             arrValues.add(0, ("all_clothing").replace("_", " "))
             arrValues.add(0, ("all_furniture").replace("_", " "))
         }
