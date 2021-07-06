@@ -10,6 +10,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
     companion object {
         val DATABASE_NAME = "catalog.db"
         val ACNL_ALL_CLOTHING_TABLES = arrayOf("acnl_accessory", "acnl_bottom", "acnl_dress", "acnl_feet", "acnl_hat", "acnl_shirt", "acnl_wet_suit")
+        val ACNL_ALL_HOUSEWARES_TABLES = arrayOf("acnl_furniture", "acnl_carpet", "acnl_wallpaper", "acnl_gyroid")
         val ACNH_ALL_CLOTHING_TABLES = arrayOf("acnh_accessory", "acnh_bag", "acnh_bottom", "acnh_dress", "acnh_headwear", "acnh_shoe", "acnh_sock", "acnh_top", "acnh_other_clothing")
         val ACNH_ALL_FURNITURE_TABLES = arrayOf("acnh_houseware", "acnh_misc", "acnh_wall_mounted")
     }
@@ -38,6 +39,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
     //used exclusively by developer to fix sql bugs
     fun recreate() {
         val db = this.writableDatabase
+        /*
         val sqlReader = SQLReader()
         var sqlStr = sqlReader.getSQLDataFromAssets(context, "update8.sql")
         var sqlArr = sqlStr?.split("\n")
@@ -54,6 +56,8 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
                 println("Error #$errNo on line $lineNo using sql statement: $str")
             }
         }
+
+         */
         setupPreferences(db)
     }
 
@@ -306,6 +310,24 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
                 cursor.close()
             }
             return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase()!!.replace("-", " ") }).toMutableList()
+        } else if (tableName == "acnl_all_housewares") {
+
+            for (table in ACNL_ALL_HOUSEWARES_TABLES) {
+                val cursor = getCursorData(table)
+
+                cursor.moveToFirst()
+                do {
+                    var map = emptyMap<String, String>().toMutableMap()
+                    for (column in cursor.columnNames) {
+                        map[column] = cursor.getString(cursor.getColumnIndex(column))
+                    }
+                    map["Type"] = table
+                    myDataset.add(map)
+                } while (cursor.moveToNext())
+
+                cursor.close()
+            }
+            return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase()!!.replace("-", " ") }).toMutableList()
         }
         else if (tableName == "acnh_all_clothing") {
 
@@ -374,6 +396,20 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         if (tableName == "acnl_all_clothing") {
 
             for (table in ACNL_ALL_CLOTHING_TABLES) {
+                val cursor = getFromCursorData(table, db)
+
+                cursor.moveToFirst()
+                do {
+                    for (column in cursor.columnNames) {
+                        myDataset.add(cursor.getString(cursor.getColumnIndex(column)))
+                    }
+                } while (cursor.moveToNext())
+
+                cursor.close()
+            }
+        } else if (tableName == "acnl_all_housewares") {
+
+            for (table in ACNL_ALL_HOUSEWARES_TABLES) {
                 val cursor = getFromCursorData(table, db)
 
                 cursor.moveToFirst()
@@ -501,6 +537,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         cursor.close()
         if (tableName == "acnl_table") {
             arrValues.add(0, ("all_clothing").replace("_", " "))
+            arrValues.add(0, ("all_housewares").replace("_", " "))
         } else if (tableName == "acnh_table") {
             arrValues.add(0, ("all_clothing").replace("_", " "))
             arrValues.add(0, ("all_furniture").replace("_", " "))
@@ -519,6 +556,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         cursor.close()
         if (tableName == "acnl_table") {
             arrValues.add(0, ("all_clothing").replace("_", " "))
+            arrValues.add(0, ("all_housewares").replace("_", " "))
         } else if (tableName == "acnh_table") {
             arrValues.add(0, ("all_clothing").replace("_", " "))
             arrValues.add(0, ("all_furniture").replace("_", " "))
