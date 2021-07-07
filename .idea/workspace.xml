@@ -10,24 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c854f0e-d1f0-4dc7-b6c8-23fc4d4462c5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/DBHelper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/DBHelper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/GlobalFunctions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/GlobalFunctions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/abw4v/accatalog/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/settings_alert.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/settings_alert.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_2_API_29]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -175,51 +169,56 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.sql" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1334" height="254" key="GridCell.Tab.0.bottom" timestamp="1623098106503">
+    <state width="583" height="438" key="DebuggerActiveHint" timestamp="1625676730072">
       <screen x="0" y="25" width="1920" height="953" />
     </state>
-    <state width="1334" height="254" key="GridCell.Tab.0.bottom/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1623098106503" />
+    <state width="583" height="438" key="DebuggerActiveHint/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1625676730072" />
+    <state width="1241" height="254" key="GridCell.Tab.0.bottom" timestamp="1625677432704">
+      <screen x="0" y="25" width="1920" height="953" />
+    </state>
+    <state width="1241" height="254" key="GridCell.Tab.0.bottom/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1625677432704" />
     <state width="1334" height="254" key="GridCell.Tab.0.bottom/-1792.0.1792.1120/0.25.1920.957@0.25.1920.957" timestamp="1623082112091" />
-    <state width="1334" height="254" key="GridCell.Tab.0.center" timestamp="1623098106502">
+    <state width="1241" height="254" key="GridCell.Tab.0.center" timestamp="1625677432704">
       <screen x="0" y="25" width="1920" height="953" />
     </state>
-    <state width="1334" height="254" key="GridCell.Tab.0.center/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1623098106502" />
+    <state width="1241" height="254" key="GridCell.Tab.0.center/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1625677432704" />
     <state width="1334" height="254" key="GridCell.Tab.0.center/-1792.0.1792.1120/0.25.1920.957@0.25.1920.957" timestamp="1623082112090" />
-    <state width="1334" height="254" key="GridCell.Tab.0.left" timestamp="1623098106502">
+    <state width="1241" height="254" key="GridCell.Tab.0.left" timestamp="1625677432704">
       <screen x="0" y="25" width="1920" height="953" />
     </state>
-    <state width="1334" height="254" key="GridCell.Tab.0.left/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1623098106502" />
+    <state width="1241" height="254" key="GridCell.Tab.0.left/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1625677432704" />
     <state width="1334" height="254" key="GridCell.Tab.0.left/-1792.0.1792.1120/0.25.1920.957@0.25.1920.957" timestamp="1623082112090" />
-    <state width="1334" height="254" key="GridCell.Tab.0.right" timestamp="1623098106503">
+    <state width="1241" height="254" key="GridCell.Tab.0.right" timestamp="1625677432704">
       <screen x="0" y="25" width="1920" height="953" />
     </state>
-    <state width="1334" height="254" key="GridCell.Tab.0.right/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1623098106503" />
+    <state width="1241" height="254" key="GridCell.Tab.0.right/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1625677432704" />
     <state width="1334" height="254" key="GridCell.Tab.0.right/-1792.0.1792.1120/0.25.1920.957@0.25.1920.957" timestamp="1623082112091" />
-    <state width="1334" height="254" key="GridCell.Tab.1.bottom" timestamp="1623098106504">
+    <state width="1241" height="254" key="GridCell.Tab.1.bottom" timestamp="1625677428612">
       <screen x="0" y="25" width="1920" height="953" />
     </state>
-    <state width="1334" height="254" key="GridCell.Tab.1.bottom/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1623098106504" />
+    <state width="1241" height="254" key="GridCell.Tab.1.bottom/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1625677428612" />
     <state width="1334" height="254" key="GridCell.Tab.1.bottom/-1792.0.1792.1120/0.25.1920.957@0.25.1920.957" timestamp="1623082108859" />
-    <state width="1334" height="254" key="GridCell.Tab.1.center" timestamp="1623098106503">
+    <state width="1241" height="254" key="GridCell.Tab.1.center" timestamp="1625677428611">
       <screen x="0" y="25" width="1920" height="953" />
     </state>
-    <state width="1334" height="254" key="GridCell.Tab.1.center/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1623098106503" />
+    <state width="1241" height="254" key="GridCell.Tab.1.center/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1625677428611" />
     <state width="1334" height="254" key="GridCell.Tab.1.center/-1792.0.1792.1120/0.25.1920.957@0.25.1920.957" timestamp="1623082108859" />
-    <state width="1334" height="254" key="GridCell.Tab.1.left" timestamp="1623098106503">
+    <state width="1241" height="254" key="GridCell.Tab.1.left" timestamp="1625677428611">
       <screen x="0" y="25" width="1920" height="953" />
     </state>
-    <state width="1334" height="254" key="GridCell.Tab.1.left/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1623098106503" />
+    <state width="1241" height="254" key="GridCell.Tab.1.left/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1625677428611" />
     <state width="1334" height="254" key="GridCell.Tab.1.left/-1792.0.1792.1120/0.25.1920.957@0.25.1920.957" timestamp="1623082108859" />
-    <state width="1334" height="254" key="GridCell.Tab.1.right" timestamp="1623098106503">
+    <state width="1241" height="254" key="GridCell.Tab.1.right" timestamp="1625677428611">
       <screen x="0" y="25" width="1920" height="953" />
     </state>
-    <state width="1334" height="254" key="GridCell.Tab.1.right/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1623098106503" />
+    <state width="1241" height="254" key="GridCell.Tab.1.right/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1625677428611" />
     <state width="1334" height="254" key="GridCell.Tab.1.right/-1792.0.1792.1120/0.25.1920.957@0.25.1920.957" timestamp="1623082108859" />
-    <state x="549" y="268" width="606" height="517" key="find.popup" timestamp="1625604984929">
-      <screen x="0" y="25" width="1792" height="1002" />
+    <state x="588" y="258" width="615" height="494" key="find.popup" timestamp="1625687603086">
+      <screen x="0" y="25" width="1920" height="960" />
     </state>
-    <state x="588" y="256" width="615" height="490" key="find.popup/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1623081135404" />
+    <state x="588" y="256" width="615" height="490" key="find.popup/-1792.0.1792.1120/0.25.1920.953@0.25.1920.953" timestamp="1625675780592" />
     <state x="588" y="257" width="615" height="493" key="find.popup/-1792.0.1792.1120/0.25.1920.957@0.25.1920.957" timestamp="1623081999633" />
+    <state x="588" y="258" width="615" height="494" key="find.popup/-1792.0.1792.1120/0.25.1920.960@0.25.1920.960" timestamp="1625687603086" />
     <state x="549" y="268" width="606" height="517" key="find.popup/0.25.1792.1002@0.25.1792.1002" timestamp="1625604984929" />
   </component>
   <component name="XDebuggerManager">
@@ -229,6 +228,7 @@
         <watch expression="cursor.count" language="kotlin" />
         <watch expression="MainActivity.selectedTablePreferences" language="kotlin" />
         <watch expression="MainActivity.fromDataset" language="kotlin" />
+        <watch expression="((LinkedHashMap)element).entrySet().toArray()[7]" custom="java.util.LinkedHashMap" />
       </configuration>
     </watches-manager>
   </component>

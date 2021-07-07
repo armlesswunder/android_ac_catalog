@@ -5,14 +5,20 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 9) {
+class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
 
     companion object {
-        val DATABASE_NAME = "catalog.db"
+        val DB_NAME = "catalog.db"
+        val DB_VERSION = 9
+        val ACGC_ALL_HOUSEWARES_TABLES = arrayOf("acgc_furniture", "acgc_carpet", "acgc_wallpaper", "acgc_gyroid")
+        val ACWW_ALL_CLOTHING_TABLES = arrayOf("acww_accessory", "acww_shirt")
+        val ACWW_ALL_HOUSEWARES_TABLES = arrayOf("acww_furniture", "acww_carpet", "acww_wallpaper", "acww_gyroid")
+        val ACCF_ALL_CLOTHING_TABLES = arrayOf("accf_accessory", "accf_shirt")
+        val ACCF_ALL_HOUSEWARES_TABLES = arrayOf("accf_furniture", "accf_carpet", "accf_wallpaper", "accf_gyroid", "accf_painting")
         val ACNL_ALL_CLOTHING_TABLES = arrayOf("acnl_accessory", "acnl_bottom", "acnl_dress", "acnl_feet", "acnl_hat", "acnl_shirt", "acnl_wet_suit")
         val ACNL_ALL_HOUSEWARES_TABLES = arrayOf("acnl_furniture", "acnl_carpet", "acnl_wallpaper", "acnl_gyroid")
         val ACNH_ALL_CLOTHING_TABLES = arrayOf("acnh_accessory", "acnh_bag", "acnh_bottom", "acnh_dress", "acnh_headwear", "acnh_shoe", "acnh_sock", "acnh_top", "acnh_other_clothing")
-        val ACNH_ALL_FURNITURE_TABLES = arrayOf("acnh_houseware", "acnh_misc", "acnh_wall_mounted")
+        val ACNH_ALL_HOUSING_TABLES = arrayOf("acnh_houseware", "acnh_misc", "acnh_wall_mounted", "acnh_art", "acnh_flooring", "acnh_rug", "acnh_wallpaper")
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -289,30 +295,26 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         return cursor!!
     }
 
+    fun getAllTable(tableName: String): Array<String>? {
+        if (tableName.equals("acnh_all_clothing")) return ACNH_ALL_CLOTHING_TABLES
+        else if (tableName.equals("acnh_all_housing")) return ACNH_ALL_HOUSING_TABLES
+        else if (tableName.equals("acnl_all_clothing")) return ACNL_ALL_CLOTHING_TABLES
+        else if (tableName.equals("acnl_all_housewares")) return ACNL_ALL_HOUSEWARES_TABLES
+        else if (tableName.equals("accf_all_clothing")) return ACCF_ALL_CLOTHING_TABLES
+        else if (tableName.equals("accf_all_housewares")) return ACCF_ALL_HOUSEWARES_TABLES
+        else if (tableName.equals("acww_all_clothing")) return ACWW_ALL_CLOTHING_TABLES
+        else if (tableName.equals("acww_all_housewares")) return ACWW_ALL_HOUSEWARES_TABLES
+        else if (tableName.equals("acgc_all_housewares")) return ACGC_ALL_HOUSEWARES_TABLES
+        else return null
+    }
+
     fun getData(tableName: String): MutableList<MutableMap<String, String>> {
         val myDataset = emptyList<MutableMap<String, String>>().toMutableList()
 
-        if (tableName == "acnl_all_clothing") {
-
-            for (table in ACNL_ALL_CLOTHING_TABLES) {
-                val cursor = getCursorData(table)
-
-                cursor.moveToFirst()
-                do {
-                    var map = emptyMap<String, String>().toMutableMap()
-                    for (column in cursor.columnNames) {
-                        map[column] = cursor.getString(cursor.getColumnIndex(column))
-                    }
-                    map["Type"] = table
-                    myDataset.add(map)
-                } while (cursor.moveToNext())
-
-                cursor.close()
-            }
-            return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase()!!.replace("-", " ") }).toMutableList()
-        } else if (tableName == "acnl_all_housewares") {
-
-            for (table in ACNL_ALL_HOUSEWARES_TABLES) {
+        // for multi-tables
+        val allTables = getAllTable(tableName)
+        if (allTables != null) {
+            for (table in allTables) {
                 val cursor = getCursorData(table)
 
                 cursor.moveToFirst()
@@ -329,44 +331,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
             }
             return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase()!!.replace("-", " ") }).toMutableList()
         }
-        else if (tableName == "acnh_all_clothing") {
-
-            for (table in ACNH_ALL_CLOTHING_TABLES) {
-                val cursor = getCursorData(table)
-
-                cursor.moveToFirst()
-                do {
-                    var map = emptyMap<String, String>().toMutableMap()
-                    for (column in cursor.columnNames) {
-                        map[column] = cursor.getString(cursor.getColumnIndex(column))
-                    }
-                    map["Type"] = table
-                    myDataset.add(map)
-                } while (cursor.moveToNext())
-
-                cursor.close()
-            }
-            return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase()!!.replace("-", " ") }).toMutableList()
-        }
-        else if (tableName == "acnh_all_furniture") {
-
-            for (table in ACNH_ALL_FURNITURE_TABLES) {
-                val cursor = getCursorData(table)
-
-                cursor.moveToFirst()
-                do {
-                    var map = emptyMap<String, String>().toMutableMap()
-                    for (column in cursor.columnNames) {
-                        map[column] = cursor.getString(cursor.getColumnIndex(column))
-                    }
-                    map["Type"] = table
-                    myDataset.add(map)
-                } while (cursor.moveToNext())
-
-                cursor.close()
-            }
-            return myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase()!!.replace("-", " ") }).toMutableList()
-        }
+        // for regular tables
         else {
 
             val cursor = getCursorData(tableName)
@@ -393,23 +358,10 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         val db = this.readableDatabase
         val myDataset = emptySet<String>().toMutableSet()
 
-        if (tableName == "acnl_all_clothing") {
-
-            for (table in ACNL_ALL_CLOTHING_TABLES) {
-                val cursor = getFromCursorData(table, db)
-
-                cursor.moveToFirst()
-                do {
-                    for (column in cursor.columnNames) {
-                        myDataset.add(cursor.getString(cursor.getColumnIndex(column)))
-                    }
-                } while (cursor.moveToNext())
-
-                cursor.close()
-            }
-        } else if (tableName == "acnl_all_housewares") {
-
-            for (table in ACNL_ALL_HOUSEWARES_TABLES) {
+        val allTables = getAllTable(tableName)
+        // for multi-tables
+        if (allTables != null) {
+            for (table in allTables) {
                 val cursor = getFromCursorData(table, db)
 
                 cursor.moveToFirst()
@@ -422,36 +374,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
                 cursor.close()
             }
         }
-        else if (tableName == "acnh_all_clothing") {
-
-            for (table in ACNH_ALL_CLOTHING_TABLES) {
-                val cursor = getFromCursorData(table, db)
-
-                cursor.moveToFirst()
-                do {
-                    for (column in cursor.columnNames) {
-                        myDataset.add(cursor.getString(cursor.getColumnIndex(column)))
-                    }
-                } while (cursor.moveToNext())
-
-                cursor.close()
-            }
-        }
-        else if (tableName == "acnh_all_furniture") {
-
-            for (table in ACNH_ALL_FURNITURE_TABLES) {
-                val cursor = getFromCursorData(table, db)
-
-                cursor.moveToFirst()
-                do {
-                    for (column in cursor.columnNames) {
-                        myDataset.add(cursor.getString(cursor.getColumnIndex(column)))
-                    }
-                } while (cursor.moveToNext())
-
-                cursor.close()
-            }
-        }
+        // for regular tables
         else {
             val cursor = getFromCursorData(tableName, db)
 
@@ -535,12 +458,21 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
             arrValues.add(cursor.getString(0).replace("_", " "))
         } while (cursor.moveToNext())
         cursor.close()
-        if (tableName == "acnl_table") {
+        //add multi tables if applicable
+        if (tableName == "acgc_table") {
+            arrValues.add(0, ("all_housewares").replace("_", " "))
+        } else if (tableName == "acww_table") {
+            arrValues.add(0, ("all_clothing").replace("_", " "))
+            arrValues.add(0, ("all_housewares").replace("_", " "))
+        } else if (tableName == "accf_table") {
+            arrValues.add(0, ("all_clothing").replace("_", " "))
+            arrValues.add(0, ("all_housewares").replace("_", " "))
+        } else if (tableName == "acnl_table") {
             arrValues.add(0, ("all_clothing").replace("_", " "))
             arrValues.add(0, ("all_housewares").replace("_", " "))
         } else if (tableName == "acnh_table") {
             arrValues.add(0, ("all_clothing").replace("_", " "))
-            arrValues.add(0, ("all_furniture").replace("_", " "))
+            arrValues.add(0, ("all_housing").replace("_", " "))
         }
         return arrValues
     }
@@ -554,18 +486,26 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
             arrValues.add(cursor.getString(0).replace("_", " "))
         } while (cursor.moveToNext())
         cursor.close()
-        if (tableName == "acnl_table") {
+        //add multi tables if applicable
+        if (tableName == "acgc_table") {
+            arrValues.add(0, ("all_housewares").replace("_", " "))
+        } else if (tableName == "acww_table") {
+            arrValues.add(0, ("all_clothing").replace("_", " "))
+            arrValues.add(0, ("all_housewares").replace("_", " "))
+        } else if (tableName == "accf_table") {
+            arrValues.add(0, ("all_clothing").replace("_", " "))
+            arrValues.add(0, ("all_housewares").replace("_", " "))
+        } else if (tableName == "acnl_table") {
             arrValues.add(0, ("all_clothing").replace("_", " "))
             arrValues.add(0, ("all_housewares").replace("_", " "))
         } else if (tableName == "acnh_table") {
             arrValues.add(0, ("all_clothing").replace("_", " "))
-            arrValues.add(0, ("all_furniture").replace("_", " "))
+            arrValues.add(0, ("all_housing").replace("_", " "))
         }
         return arrValues
     }
 
     fun checkItem(index: String, tableName: String, value: String?) {
-
         if (value == null)
             return
 
@@ -663,6 +603,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         return cursor!!
     }
 
+    // preferences are the sets of filters you apply for every item type
     private fun setupPreferences(db: SQLiteDatabase) {
         val sqlStrList = emptyList<String>().toMutableList()
         val existingPreferencesTables = getPreferencesTables(db)
@@ -751,6 +692,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DATABA
         return map
     }
 
+    // the list of item types for each game are returned here
     fun getAllTables(db: SQLiteDatabase): MutableList<String> {
         val tableList = emptyList<String>().toMutableList()
 

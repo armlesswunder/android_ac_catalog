@@ -75,9 +75,9 @@ fun filter(db: DBHelper, context: Context) {
         }.toMutableList()
 
 
-        if (MainActivity.masterDataset[0].containsKey("From")) {
+        if (MainActivity.masterDataset[0].containsKey("From") && MainActivity.from.isNotEmpty()) {
             MainActivity.myDataset = MainActivity.myDataset.filter { element ->
-                element["From"]!!.toLowerCase().contains(MainActivity.from.toLowerCase())
+                element["From"] != null && element["From"]!!.toLowerCase().contains(MainActivity.from.toLowerCase())
             }.toMutableList()
         }
     }

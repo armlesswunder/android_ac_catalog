@@ -3,7 +3,13 @@ package com.abw4v.accatalog
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
+import android.content.pm.PackageInfo
+import android.net.Uri
+import android.os.Bundle
+import android.os.Environment
+import android.os.FileUtils
+import android.provider.DocumentsContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -11,22 +17,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.cardview.widget.CardView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abw4v.accatalog.MainActivity.Companion.selectedFilter
-import java.lang.ref.WeakReference
-import java.util.*
-import android.content.SharedPreferences
-import android.net.Uri
-import android.os.*
-import android.provider.DocumentsContract
-import androidx.cardview.widget.CardView
-import androidx.core.net.toUri
 import com.abw4v.accatalog.MainActivity.Companion.useCritterWarningColors
-import java.io.*
-import java.lang.Exception
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.lang.ref.WeakReference
 import java.nio.charset.Charset
+import java.util.*
 
 const val CREATE_FILE = 1
 const val OPEN_FILE = 2
@@ -53,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         var seasonIndex = 0
         var selectedSeasonIndex = 0
         var thisSeason = 0
-        var itemType = "all_furniture"
+        var itemType = "all_housing"
 
         lateinit var recyclerView: RecyclerView
         lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -300,21 +304,19 @@ class MainActivity : AppCompatActivity() {
 
             val selectedTable = tableSpinner.selectedItem.toString()
 
-            if (selectedTable != itemType) {
-                itemType = selectedTable
+            itemType = selectedTable
 
-                prefs.edit().putInt("item_type", tableIndex).apply()
-                prefs.edit().putString("table", itemType).apply()
+            prefs.edit().putInt("item_type", tableIndex).apply()
+            prefs.edit().putString("table", itemType).apply()
 
-                if (useSeasonData()) {
-                    seasonIndex = selectedSeasonIndex
-                } else {
-                    seasonIndex = 0
-                }
-
-                getData(db)
-
+            if (useSeasonData()) {
+                seasonIndex = selectedSeasonIndex
+            } else {
+                seasonIndex = 0
             }
+
+            getData(db)
+
             if (started) {
                 setupPreferences()
                 filter(db, context)
@@ -464,6 +466,7 @@ class MainActivity : AppCompatActivity() {
             val saveBtn = layout.findViewById<TextView>(R.id.saveBtn)
             val loadBtn = layout.findViewById<TextView>(R.id.loadBtn)
             val devBtn = layout.findViewById<TextView>(R.id.devBtn)
+            val version = layout.findViewById<TextView>(R.id.version)
             val faqBtn = layout.findViewById<TextView>(R.id.faqBtn)
             val guideBtn = layout.findViewById<TextView>(R.id.guideBtn)
 
@@ -485,6 +488,8 @@ class MainActivity : AppCompatActivity() {
             devBtn.setOnClickListener {
                 db.recreate()
             }
+
+            version.setText("Version: " + getVersionString(this@MainActivity) + " ("+ DBHelper.DB_VERSION + ")")
 
             loadBtn.setOnClickListener {
                 globalDBHelper = WeakReference(db)
@@ -529,6 +534,19 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }.create().show()
+    }
+
+
+    fun getVersionString(context: Context): String? {
+        var version = ""
+        val pInfo: PackageInfo
+        try {
+            pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+            version = pInfo.versionName
+        } catch (e: Throwable) {
+            e.printStackTrace()
+        }
+        return version
     }
 
     private fun createFile(pickerInitialUri: Uri) {
