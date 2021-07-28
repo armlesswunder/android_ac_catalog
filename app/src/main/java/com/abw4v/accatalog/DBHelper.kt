@@ -9,7 +9,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DB_NAM
 
     companion object {
         val DB_NAME = "catalog.db"
-        val DB_VERSION = 9
+        val DB_VERSION = 10
         val ACGC_ALL_HOUSEWARES_TABLES = arrayOf("acgc_furniture", "acgc_carpet", "acgc_wallpaper", "acgc_gyroid")
         val ACWW_ALL_CLOTHING_TABLES = arrayOf("acww_accessory", "acww_shirt")
         val ACWW_ALL_HOUSEWARES_TABLES = arrayOf("acww_furniture", "acww_carpet", "acww_wallpaper", "acww_gyroid")
@@ -207,6 +207,26 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DB_NAM
         }
     }
 
+    fun update8(db: SQLiteDatabase) {
+
+        val sqlReader = SQLReader()
+        var sqlStr = sqlReader.getSQLDataFromAssets(context, "update8.sql")
+        var sqlArr = sqlStr?.split("\n")
+        var lineNo = 1
+        var errNo = 0
+
+        for (str in sqlArr!!) {
+            try {
+                db.execSQL(str)
+                lineNo++
+            } catch(e: Throwable) {
+                lineNo++
+                errNo++
+                println("Error #$errNo on line $lineNo using sql statement: $str")
+            }
+        }
+    }
+
     fun executeSQLFromFile(sqlStr: String) {
 
         val db = this.writableDatabase
@@ -252,6 +272,9 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DB_NAM
         //skip one bc versions got messed up in 12/6/2020 release
         if (oldVersion < 9) {
             update7(db)
+        }
+        if (oldVersion < 10) {
+            update8(db)
         }
 
         setupPreferences(db)

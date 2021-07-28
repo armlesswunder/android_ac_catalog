@@ -5,6 +5,12 @@ Contact: abw4v.dev@gmail.com
 
 Play Store: https://play.google.com/store/apps/details?id=com.abw4v.accatalog
 
+# News
+
+7/28/21: I'm releasing changes to New Leaf to support welcome amiibo items as well. Currently, I'm planning on doing an update to New Horizons towards the end of the year to support items which are currently missing (dlc items). I'm sorry for the huge delay here, but it is far easier to add these items in batches rather that adding for each update. Thank you for your patience. 
+
+I'm also planning on adding an apk here so that users may bypass the app store. 
+
 # Guide
 
 ![picture](Images/MainIndex.png)
