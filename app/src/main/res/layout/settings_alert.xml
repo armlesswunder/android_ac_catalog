@@ -99,6 +99,17 @@
         app:layout_constraintEnd_toEndOf="@id/guideline"/>
 
     <TextView
+        android:id="@+id/completionBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Completion"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/faqBtn" />
+
+    <TextView
         android:id="@+id/devBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -108,6 +119,6 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/faqBtn" />
+        app:layout_constraintTop_toBottomOf="@id/completionBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

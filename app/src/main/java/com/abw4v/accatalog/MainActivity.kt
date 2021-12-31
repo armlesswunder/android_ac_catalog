@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageInfo
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -21,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.cardview.widget.CardView
 import androidx.core.net.toUri
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abw4v.accatalog.MainActivity.Companion.selectedFilter
@@ -61,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
         lateinit var recyclerView: RecyclerView
         lateinit var viewAdapter: RecyclerView.Adapter<*>
-        lateinit var viewManager: RecyclerView.LayoutManager
+        lateinit var viewManager: GridLayoutManager
 
         val gameDisplay = arrayOf("Gamecube", "Wild World", "City Folk", "New Leaf", "New Horizons")
         val seasonDisplay = arrayOf("(no filter)", "January", "February", "March", "April", "May", "June", "July", "August - 1st Half", "August - 2nd Half", "September - 1st Half", "September - 2nd Half", "October", "November", "December")
@@ -189,7 +191,9 @@ class MainActivity : AppCompatActivity() {
         tableSpinner.onItemSelectedListener =
             TableSpinnerListener(this, db, prefs, tableSpinner)
 
-        viewManager = LinearLayoutManager(this)
+        var numColumns = 1
+        if (isTablet(this)) numColumns = 2
+        viewManager = GridLayoutManager(this, numColumns)
         viewAdapter = RecViewAdapter(myDataset, db, this)
 
         recyclerView = findViewById<RecyclerView>(R.id.my_recycler_view).apply {
@@ -466,12 +470,15 @@ class MainActivity : AppCompatActivity() {
             val saveBtn = layout.findViewById<TextView>(R.id.saveBtn)
             val loadBtn = layout.findViewById<TextView>(R.id.loadBtn)
             val devBtn = layout.findViewById<TextView>(R.id.devBtn)
+            val completionBtn = layout.findViewById<TextView>(R.id.completionBtn)
             val version = layout.findViewById<TextView>(R.id.version)
             val faqBtn = layout.findViewById<TextView>(R.id.faqBtn)
             val guideBtn = layout.findViewById<TextView>(R.id.guideBtn)
 
             useCurrentDateCheckBox.isChecked = useCurrentSeason
             useCritterWarningColorsCheckbox.isChecked = useCritterWarningColors
+
+            completionBtn.setOnClickListener { btnCompletionPressed() }
 
             guideBtn.setOnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW);
@@ -534,6 +541,55 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }.create().show()
+    }
+
+    fun btnCompletionPressed() {
+        val alertBuilder = AlertDialog.Builder(this@MainActivity)
+
+        alertBuilder.apply {
+            val layout = LayoutInflater.from(context).inflate(R.layout.completion_alert, null)
+            setView(layout)
+            val txt = layout.findViewById<TextView>(R.id.txt)
+            val progress = layout.findViewById<ProgressBar>(R.id.progressBar)
+
+            val selectedCount = getSelectedCount()
+            val percent: Float = (((selectedCount.toFloat()/masterDataset.size.toFloat())) * 100f)
+
+            txt.setText(getGameDisplay() + "\n" + getItemTypeDisplay() + ": " + selectedCount + "/"+ masterDataset.size + "   " + String.format("%.2f", percent) + "%")
+            progress.progress = (percent).toInt()
+
+            show()
+        }
+    }
+
+    fun getGameDisplay(): String {
+        var str = ""
+        if (qualifierIndex < gameDisplay.size && qualifierIndex >= 0) {
+            str = gameDisplay[qualifierIndex]
+        }
+        return str
+    }
+
+    fun getItemTypeDisplay(): String {
+        var str = ""
+        var season = ""
+        if (useSeasonData() && seasonIndex != 0) {
+            season = seasonDisplay[seasonIndex] + " "
+        }
+
+        str = season + itemType.capitalize()
+        return str
+    }
+
+    fun getSelectedCount(): Int {
+        var count = 0
+
+        for (item in masterDataset) {
+            if (item["Selected"] != null && item["Selected"].equals("1"))
+                count++
+        }
+
+        return count
     }
 
 
@@ -636,6 +692,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+}
+
+fun isTablet(context: Context): Boolean {
+    return ((context.resources.configuration.screenLayout
+            and Configuration.SCREENLAYOUT_SIZE_MASK)
+            >= Configuration.SCREENLAYOUT_SIZE_LARGE)
 }
 
 class RecViewAdapter(private val values : MutableList<MutableMap<String, String>>, private val db: DBHelper, private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
