@@ -662,6 +662,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         } else if (requestCode == OPEN_FILE && resultCode == Activity.RESULT_OK) {
+            var versionCode = -1
             resultData?.data?.also { inputUri ->
                 try {
                     this.contentResolver.openFileDescriptor(inputUri, "r")?.use {
@@ -669,29 +670,61 @@ class MainActivity : AppCompatActivity() {
                             val buffer = StringBuffer()
                             val reader = inputStream.bufferedReader()
                             var line = reader.readLine()
+                            try {
+                                if (line != null && line.contains("version=")) {
+                                    versionCode = line.split("version=")[1].toInt()
+                                }
+                            } catch (e: Throwable) {
+                                e.printStackTrace()
+                            }
                             while (line != null) {
-                                buffer.append(line)
+                                buffer.append(line+'\n')
                                 line = reader.readLine()
                             }
                             fileStr = buffer.toString()
                         }
                     }
 
-
-                    globalDBHelper.get()?.executeSQLFromFile(fileStr)
-
-                    val alertBuilder1 = AlertDialog.Builder(this@MainActivity)
-                    alertBuilder1.apply {
-                        setTitle("Success")
-                        setMessage("Successfully loaded backup file.")
-                        setPositiveButton("OK") { _, _ -> }
-                    }.show()
+                    // 2.0 implemented in DB Version 11, all other backup files (more or less) obsolete
+                    if (versionCode < 11) {
+                        val alertBuilderWarn = AlertDialog.Builder(this@MainActivity)
+                        alertBuilderWarn.apply {
+                            setTitle("Warning!")
+                            setMessage("You are attmepting to use old/invalid backup data. Are you sure you want to continue?")
+                            setPositiveButton("OK") { _, _ ->
+                                loadState(fileStr, this@MainActivity)
+                            }
+                            setNegativeButton("Cancel") { _, _ -> }
+                        }.show()
+                    } else {
+                        loadState(fileStr, this@MainActivity)
+                    }
 
                 } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }
         }
     }
+}
+
+fun loadState(fileStr: String, context: Context) {
+    globalDBHelper.get()?.executeSQLFromFile(fileStr)
+    val alertBuilderSuccess = AlertDialog.Builder(context)
+    alertBuilderSuccess.apply {
+        setTitle("Success")
+        setMessage("Successfully loaded backup file.")
+        setPositiveButton("OK") { _, _ -> }
+    }.show()
+}
+
+fun showUpdateNotification(context: Context) {
+    val alertBuilderSuccess = AlertDialog.Builder(context)
+    alertBuilderSuccess.apply {
+        setTitle("Success")
+        setMessage("Successfully loaded backup file.")
+        setPositiveButton("OK") { _, _ -> }
+    }.show()
 }
 
 fun isTablet(context: Context): Boolean {

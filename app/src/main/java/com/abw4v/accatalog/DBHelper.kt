@@ -9,7 +9,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DB_NAM
 
     companion object {
         val DB_NAME = "catalog.db"
-        val DB_VERSION = 10
+        val DB_VERSION = 11
         val ACGC_ALL_HOUSEWARES_TABLES = arrayOf("acgc_furniture", "acgc_carpet", "acgc_wallpaper", "acgc_gyroid")
         val ACWW_ALL_CLOTHING_TABLES = arrayOf("acww_accessory", "acww_shirt")
         val ACWW_ALL_HOUSEWARES_TABLES = arrayOf("acww_furniture", "acww_carpet", "acww_wallpaper", "acww_gyroid")
@@ -18,7 +18,8 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DB_NAM
         val ACNL_ALL_CLOTHING_TABLES = arrayOf("acnl_accessory", "acnl_bottom", "acnl_dress", "acnl_feet", "acnl_hat", "acnl_shirt", "acnl_wet_suit")
         val ACNL_ALL_HOUSEWARES_TABLES = arrayOf("acnl_furniture", "acnl_carpet", "acnl_wallpaper", "acnl_gyroid")
         val ACNH_ALL_CLOTHING_TABLES = arrayOf("acnh_accessory", "acnh_bag", "acnh_bottom", "acnh_dress", "acnh_headwear", "acnh_shoe", "acnh_sock", "acnh_top", "acnh_other_clothing")
-        val ACNH_ALL_HOUSING_TABLES = arrayOf("acnh_houseware", "acnh_misc", "acnh_wall_mounted", "acnh_art", "acnh_flooring", "acnh_rug", "acnh_wallpaper")
+        val ACNH_ALL_HOUSING_TABLES = arrayOf("acnh_houseware", "acnh_misc", "acnh_ceiling", "acnh_interior", "acnh_wall_mounted", "acnh_art", "acnh_flooring", "acnh_rug", "acnh_wallpaper")
+        val ACNH_VARIATIONS_HELPER2 = arrayOf("acnh_houseware", "acnh_misc", "acnh_wall_mounted")
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -45,9 +46,44 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DB_NAM
     //used exclusively by developer to fix sql bugs
     fun recreate() {
         val db = this.writableDatabase
-        /*
+        updateDuplicates2(db)
+    }
+
+    fun updateDuplicates2(db: SQLiteDatabase) {
+        val myDataset = emptyList<MutableMap<String, String>>().toMutableList()
+
+        for (table in ACNH_VARIATIONS_HELPER2) {
+            val cursor = getCursorData(table, db)
+
+            cursor.moveToFirst()
+            do {
+                var map = emptyMap<String, String>().toMutableMap()
+                for (column in cursor.columnNames) {
+                    map[column] = cursor.getString(cursor.getColumnIndex(column))
+                }
+                map["Type"] = table
+                myDataset.add(map)
+            } while (cursor.moveToNext())
+
+            cursor.close()
+        }
+        myDataset.sortedWith(compareBy { it["Name"]?.toLowerCase()!!.replace("-", " ") }).toMutableList()
+        val checkedItems = arrayListOf<String>()
+        for (item in myDataset) {
+            if (item["Selected"] == "1" &&
+                item["Name"]!!.contains(" (")) {
+                val name = item["Name"]!!.substring(0, item["Name"]!!.indexOf(" ("))
+                val type = item["Type"]
+                val update = "update ${type} set Selected = 1 where \"Name\" = \"${name}\";"
+                if (!checkedItems.contains(update)) {
+                    checkedItems.add(update)
+                    println(update)
+                }
+            }
+        }
+
         val sqlReader = SQLReader()
-        var sqlStr = sqlReader.getSQLDataFromAssets(context, "update8.sql")
+        var sqlStr = sqlReader.getSQLDataFromAssets(context, "update9.sql")
         var sqlArr = sqlStr?.split("\n")
         var lineNo = 1
         var errNo = 0
@@ -63,8 +99,20 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DB_NAM
             }
         }
 
-         */
-        setupPreferences(db)
+        lineNo = 1
+        errNo = 0
+
+        for (str in checkedItems) {
+            try {
+                db.execSQL(str)
+                lineNo++
+            } catch(e: Throwable) {
+                lineNo++
+                errNo++
+                println("Error #$errNo on line $lineNo using sql statement: $str")
+            }
+        }
+
     }
 
     fun update1(db: SQLiteDatabase) {
@@ -227,11 +275,14 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DB_NAM
         }
     }
 
+    fun update9(db: SQLiteDatabase) {
+        updateDuplicates2(db)
+    }
+
     fun executeSQLFromFile(sqlStr: String) {
 
         val db = this.writableDatabase
-        val newStr = sqlStr.replace(";", ";\n")
-        val sqlArr = newStr.split("\n")
+        val sqlArr = sqlStr.split("\n")
         var lineNo = 1
         var errNo = 0
 
@@ -275,6 +326,9 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DB_NAM
         }
         if (oldVersion < 10) {
             update8(db)
+        }
+        if (oldVersion < 11) {
+            update9(db)
         }
 
         setupPreferences(db)
@@ -540,6 +594,8 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DB_NAM
     fun backupData(): String {
         val db = this.readableDatabase
         var buffer = StringBuffer()
+
+        buffer.append("version=$DB_VERSION\n")
 
         //acgc backup
         for (table in MainActivity.tableDisplayACGC) {
