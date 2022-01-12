@@ -39,6 +39,8 @@ const val OPEN_FILE = 2
 
 const val guideURL = "https://github.com/armlesswunder/android_ac_catalog/blob/master/README.md#guide"
 const val faqURL = "https://github.com/armlesswunder/android_ac_catalog/blob/master/README.md#faq"
+const val donateURL = "https://gofund.me/e6fc7138"
+
 lateinit var globalDBHelper: WeakReference<DBHelper>
 
 class MainActivity : AppCompatActivity() {
@@ -57,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         var qualifierIndex = 4
         var tableIndex = 0
         var seasonIndex = 0
+        var columnsCount = 1
         var selectedSeasonIndex = 0
         var thisSeason = 0
         var itemType = "all_housing"
@@ -68,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         val gameDisplay = arrayOf("Gamecube", "Wild World", "City Folk", "New Leaf", "New Horizons")
         val seasonDisplay = arrayOf("(no filter)", "January", "February", "March", "April", "May", "June", "July", "August - 1st Half", "August - 2nd Half", "September - 1st Half", "September - 2nd Half", "October", "November", "December")
         val selectedDisplay = arrayOf("All items", "Checked items", "Unchecked items")
+        val columnsDisplay = arrayOf("   1   ", "   2   ")
 
         var tableDisplayACGC = emptyArray<String>()
         var tableDisplayACWW = emptyArray<String>()
@@ -191,9 +195,7 @@ class MainActivity : AppCompatActivity() {
         tableSpinner.onItemSelectedListener =
             TableSpinnerListener(this, db, prefs, tableSpinner)
 
-        var numColumns = 1
-        if (isTablet(this)) numColumns = 2
-        viewManager = GridLayoutManager(this, numColumns)
+        viewManager = GridLayoutManager(this, columnsCount)
         viewAdapter = RecViewAdapter(myDataset, db, this)
 
         recyclerView = findViewById<RecyclerView>(R.id.my_recycler_view).apply {
@@ -223,6 +225,7 @@ class MainActivity : AppCompatActivity() {
             searchBar.text.clear()
         }
         filter(db, this)
+        showUpdateNotification(this)
         progressBar.visibility = View.GONE
     }
 
@@ -290,6 +293,11 @@ class MainActivity : AppCompatActivity() {
         useCurrentSeason = prefs.getBoolean("use_current_date", false)
         useCritterWarningColors = prefs.getBoolean("use_critter_warning_colors", true)
         selectedSeasonIndex = prefs.getInt("selected_season", 0)
+        var defaultColumns = 1
+        if (isTablet(this)) {
+            defaultColumns = 2
+        }
+        columnsCount = prefs.getInt("columns_count",  defaultColumns)
     }
 
     inner class TableSpinnerListener(val context: Context, val db: DBHelper, val prefs: SharedPreferences, val tableSpinner: Spinner) : AdapterView.OnItemSelectedListener {
@@ -467,6 +475,7 @@ class MainActivity : AppCompatActivity() {
             setView(layout)
             val useCurrentDateCheckBox = layout.findViewById<CheckBox>(R.id.useCurrentDate)
             val useCritterWarningColorsCheckbox = layout.findViewById<CheckBox>(R.id.useCritterWarningColors)
+            val columnsSpinner = layout.findViewById<Spinner>(R.id.columnsSpinner)
             val saveBtn = layout.findViewById<TextView>(R.id.saveBtn)
             val loadBtn = layout.findViewById<TextView>(R.id.loadBtn)
             val devBtn = layout.findViewById<TextView>(R.id.devBtn)
@@ -474,9 +483,20 @@ class MainActivity : AppCompatActivity() {
             val version = layout.findViewById<TextView>(R.id.version)
             val faqBtn = layout.findViewById<TextView>(R.id.faqBtn)
             val guideBtn = layout.findViewById<TextView>(R.id.guideBtn)
+            val donateBtn = layout.findViewById<TextView>(R.id.donateBtn)
 
             useCurrentDateCheckBox.isChecked = useCurrentSeason
             useCritterWarningColorsCheckbox.isChecked = useCritterWarningColors
+
+            val columnsAdapter = ArrayAdapter<String>(
+                this@MainActivity,
+                android.R.layout.simple_spinner_item,
+                columnsDisplay
+            )
+
+            columnsSpinner.adapter = columnsAdapter
+            columnsAdapter.setDropDownViewResource(R.layout.simple_spinner)
+            columnsSpinner.setSelection(columnsCount - 1)
 
             completionBtn.setOnClickListener { btnCompletionPressed() }
 
@@ -494,6 +514,12 @@ class MainActivity : AppCompatActivity() {
 
             devBtn.setOnClickListener {
                 db.recreate()
+            }
+
+            donateBtn.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(donateURL));
+                startActivity(intent);
             }
 
             version.setText("Version: " + getVersionString(this@MainActivity) + " ("+ DBHelper.DB_VERSION + ")")
@@ -526,6 +552,18 @@ class MainActivity : AppCompatActivity() {
                 prefs.edit().putBoolean("use_critter_warning_colors", useCritterWarningColorsCheckbox.isChecked).apply()
                 useCurrentSeason = useCurrentDateCheckBox.isChecked
                 useCritterWarningColors = useCritterWarningColorsCheckbox.isChecked
+
+                if (columnsSpinner.selectedItemPosition + 1 != columnsCount) {
+                    columnsCount = columnsSpinner.selectedItemPosition + 1
+                    prefs.edit().putInt("columns_count", columnsCount).apply()
+                    viewManager = GridLayoutManager(this@MainActivity, columnsCount)
+                    viewAdapter = RecViewAdapter(myDataset, db, this@MainActivity)
+                    recyclerView.apply {
+                        layoutManager = viewManager
+                        adapter = viewAdapter
+                    }
+                }
+
                 if (useSeasonData()) {
                     if (useCurrentSeason) {
                         seasonIndex = thisSeason
@@ -719,12 +757,27 @@ fun loadState(fileStr: String, context: Context) {
 }
 
 fun showUpdateNotification(context: Context) {
-    val alertBuilderSuccess = AlertDialog.Builder(context)
-    alertBuilderSuccess.apply {
-        setTitle("Success")
-        setMessage("Successfully loaded backup file.")
-        setPositiveButton("OK") { _, _ -> }
-    }.show()
+    if (!updateShown(context)) {
+        val alertBuilderSuccess = AlertDialog.Builder(context)
+        alertBuilderSuccess.apply {
+            setTitle("Attention!!!")
+            setMessage("Database version has upgraded, old backup files are no longer supported! It is recommended that you create a new backup ASAP!")
+            setPositiveButton("OK") { _, _ ->
+                setUpdateShown(context)
+            }
+            setCancelable(false)
+        }.show()
+    }
+}
+
+fun updateShown(context: Context): Boolean {
+    val prefs = context.getSharedPreferences("default", Context.MODE_PRIVATE)
+    return prefs.getBoolean("update20", false)
+}
+
+fun setUpdateShown(context: Context) {
+    val prefs = context.getSharedPreferences("default", Context.MODE_PRIVATE)
+    prefs.edit().putBoolean("update20", true).apply()
 }
 
 fun isTablet(context: Context): Boolean {

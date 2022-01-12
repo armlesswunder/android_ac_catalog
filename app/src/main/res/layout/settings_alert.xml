@@ -54,7 +54,7 @@
         android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/useCritterWarningColors" />
+        app:layout_constraintTop_toBottomOf="@+id/columnsSpinner" />
 
     <TextView
         android:id="@+id/saveBtn"
@@ -65,7 +65,7 @@
         android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/useCritterWarningColors" />
+        app:layout_constraintTop_toBottomOf="@+id/columnsSpinner" />
 
     <TextView
         android:id="@+id/faqBtn"
@@ -94,20 +94,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:text="Version: ?"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideBtn"
-        app:layout_constraintEnd_toEndOf="@id/guideline"/>
+        app:layout_constraintTop_toBottomOf="@id/donateBtn" />
 
     <TextView
         android:id="@+id/completionBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Completion"
+        android:text="Progress"
         android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@id/faqBtn" />
+
+    <TextView
+        android:id="@+id/donateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Donate"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideBtn" />
+
+    <TextView
+        android:id="@+id/columnsLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Columns:"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toBottomOf="@+id/columnsSpinner"
+        app:layout_constraintEnd_toStartOf="@+id/columnsSpinner"
+        app:layout_constraintTop_toTopOf="@+id/columnsSpinner" />
+
+    <Spinner
+        android:id="@+id/columnsSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/useCritterWarningColors" />
 
     <TextView
         android:id="@+id/devBtn"
