@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.abw4v.accatalog">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
@@ -16,7 +17,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.abw4v.accatalog.MainActivity"
+        <!-- (1)=ca-app-pub-4755282088061647~2494760612 -->
+        <!-- (2)=ca-app-pub-4755282088061647/8821329961 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4755282088061647~2494760612"/>
+
+        <activity android:name=".MainActivity"
+            android:exported="true"
             android:windowSoftInputMode="stateHidden|adjustPan|adjustResize"
             android:screenOrientation="sensor">
             <intent-filter>

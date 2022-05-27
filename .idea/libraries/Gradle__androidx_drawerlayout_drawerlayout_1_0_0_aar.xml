@@ -1,12 +1,18 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.drawerlayout:drawerlayout:1.0.0@aar">
     <ANNOTATIONS>
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/25565fbf982d927901d11813f7944512/drawerlayout-1.0.0/annotations.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/54966574a6937d7da27a777ff843a636/transformed/drawerlayout-1.0.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/25565fbf982d927901d11813f7944512/drawerlayout-1.0.0/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/25565fbf982d927901d11813f7944512/drawerlayout-1.0.0/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/25565fbf982d927901d11813f7944512/drawerlayout-1.0.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/77e25648bf522dcd9d9ca0fdc0763657/drawerlayout-1.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/457ef1a4f22f620f23c2d9bd73dea4fa/drawerlayout-1.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/cbe165716a1da158b27c45f9619521d6/drawerlayout-1.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/728ee46f721db6c9ef3b9b1f559e7cac/drawerlayout-1.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/4dbdd4eb55a41b45061c35345868dc18/transformed/drawerlayout-1.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/54966574a6937d7da27a777ff843a636/transformed/drawerlayout-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/54966574a6937d7da27a777ff843a636/transformed/drawerlayout-1.0.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/54966574a6937d7da27a777ff843a636/transformed/drawerlayout-1.0.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abw4v.accatalog.MainActivity.Companion.selectedFilter
 import com.abw4v.accatalog.MainActivity.Companion.useCritterWarningColors
+import com.google.android.gms.ads.*
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -83,11 +84,13 @@ class MainActivity : AppCompatActivity() {
         var selectedTablePreferences = emptyMap<String, String>().toMutableMap()
 
         var started = false
+        val paid = false
 
         val gameValues = arrayOf("acgc_", "acww_", "accf_", "acnl_", "acnh_")
         val seasonValues = arrayOf("", "jan_", "feb_", "mar_", "apr_", "may_", "jun_", "jul_", "aug1_", "aug2_", "sep1_", "sep2_", "oct_", "nov_", "dec_")
     }
     lateinit var progressBar: ProgressBar
+    lateinit var adView: AdView
     var firstTime = false
     var fileStr = ""
 
@@ -106,6 +109,43 @@ class MainActivity : AppCompatActivity() {
         else {
             //create read/write directory
             val file = File(this@MainActivity.externalCacheDir!!.absolutePath, getFileName())
+        }
+
+        adView = findViewById(R.id.adView)
+        if (!paid) {
+            MobileAds.initialize(this) {}
+            val adRequest = AdRequest.Builder().build()
+            adView.loadAd(adRequest)
+        } else {
+            adView.visibility = View.GONE
+        }
+        adView.adListener = object: AdListener() {
+            override fun onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+                val x = 0
+            }
+
+            override fun onAdFailedToLoad(adError : LoadAdError) {
+                // Code to be executed when an ad request fails.
+                val x = 0
+            }
+
+            override fun onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+                val x = 0
+            }
+
+            override fun onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+                val x = 0
+            }
+
+            override fun onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+                val x = 0
+            }
         }
     }
 

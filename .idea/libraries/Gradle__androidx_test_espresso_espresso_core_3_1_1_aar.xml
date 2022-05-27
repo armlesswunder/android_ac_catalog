@@ -1,9 +1,15 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.test.espresso:espresso-core:3.1.1@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/4f3a9f653fc49dc66a460bd3b58d23dc/espresso-core-3.1.1/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/4f3a9f653fc49dc66a460bd3b58d23dc/espresso-core-3.1.1/res" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/4f3a9f653fc49dc66a460bd3b58d23dc/espresso-core-3.1.1/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/bf21262d40dbb748050cf40e7b17b231/espresso-core-3.1.1/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/279b766ce50b0cb8fc406b58ce01a19e/espresso-core-3.1.1/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/46eda4d5d75652f032e6e3e6dc2f29e0/espresso-core-3.1.1/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/733714dc0023e59913b382901ef33d89/espresso-core-3.1.1/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/88d146fad9dcc7e07673f08bd1ead242/transformed/espresso-core-3.1.1/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/64795c4c6c235943b6cc47ffe37e6d5f/transformed/espresso-core-3.1.1/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/64795c4c6c235943b6cc47ffe37e6d5f/transformed/espresso-core-3.1.1/res" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/64795c4c6c235943b6cc47ffe37e6d5f/transformed/espresso-core-3.1.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/androidx.test.espresso/espresso-core/3.1.1/e047f2afab2389e55fa9d9caf76e3e40b1dd6f91/espresso-core-3.1.1-javadoc.jar!/" />

@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.firebase:firebase-common:19.3.0@aar">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/fa2a9ca3fc0fd47dbf9628ea190dd642/jetified-firebase-common-19.3.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/a796b683c72749de81a51f1a1a4f5c44/jetified-firebase-common-19.3.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/bdaefc342564a1132552e9d71fb8f71d/jetified-firebase-common-19.3.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/fa07e823f1d4b34168b7f818ff69a749/jetified-firebase-common-19.3.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/3ef20373e7c0086d33d0d777402ece48/jetified-firebase-common-19.3.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/0de8d5ec974357cb87ec3bcddf9372a8/transformed/jetified-firebase-common-19.3.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/9808a4aa6bb8e67bce74ec8bc65785f3/transformed/jetified-firebase-common-19.3.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/9808a4aa6bb8e67bce74ec8bc65785f3/transformed/jetified-firebase-common-19.3.0/res" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/9808a4aa6bb8e67bce74ec8bc65785f3/transformed/jetified-firebase-common-19.3.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-common/19.3.0/8c633ce718daf595bb05a0180d299f0034cbe97e/firebase-common-19.3.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-common/19.3.0/f08fd907064524e4e418b886635e597530f855fc/firebase-common-19.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.firebase:firebase-installations-interop:16.0.0@aar">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/bf0baa94f5d903ab76df2307edd3b9de/firebase-installations-interop-16.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/eb11655bf3df8dc908ae34f96555923f/jetified-firebase-installations-interop-16.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/5bee369444ad83ea0a78c07ba01658d6/jetified-firebase-installations-interop-16.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/8dcfd14b4bb7c87c80f2f38693078e55/jetified-firebase-installations-interop-16.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/59f1be0f4a96ef8dbc23aec3f56ed291/jetified-firebase-installations-interop-16.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/5b33b7221859f697e3f524962baf71c8/transformed/jetified-firebase-installations-interop-16.0.0/res" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/b6877ef0518b468da58f3482e347ac22/transformed/jetified-firebase-installations-interop-16.0.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/b6877ef0518b468da58f3482e347ac22/transformed/jetified-firebase-installations-interop-16.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/b6877ef0518b468da58f3482e347ac22/transformed/jetified-firebase-installations-interop-16.0.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-installations-interop/16.0.0/1ae747557debcaf69a3a8082bf136399d29643de/firebase-installations-interop-16.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
