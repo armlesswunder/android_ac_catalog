@@ -17,11 +17,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!-- (1)=ca-app-pub-4755282088061647~2494760612 -->
-        <!-- (2)=ca-app-pub-4755282088061647/8821329961 -->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4755282088061647~2494760612"/>
 
         <activity android:name=".MainActivity"
             android:exported="true"
