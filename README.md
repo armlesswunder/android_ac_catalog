@@ -15,6 +15,9 @@ All of the content I have made is free, but if you wish to show your appreciatio
 
 7/28/21: I've added an apk here (under releases) so that users may bypass the app store. 
 
+# Credits
+Special thanks to Nintendo, Liquify (For all games catalog reference, except ACNH), http://moridb.com/(ACNL Welcome Amiibo items reference), and everyone who contributed to the data sheet available at Nookazon (For ACNH reference) for making all this possible!
+
 # Want to use the app on desktop?
 Please checkout bluestacks.com and download the app on the emulator.
 
