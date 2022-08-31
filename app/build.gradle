@@ -9,7 +9,7 @@ android {
     compileSdkVersion 31
     defaultConfig {
         applicationId "com.abw4v.accatalog"
-        minSdkVersion 26
+        minSdkVersion 23
         targetSdkVersion 31
         versionCode 19
         versionName "2.3"

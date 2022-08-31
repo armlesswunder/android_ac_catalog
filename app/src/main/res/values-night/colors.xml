@@ -8,4 +8,5 @@
     <color name="textColor">#F1F1F1</color>
     <color name="lightGreen">#85BBFF8B</color>
     <color name="lightRed">#81FFD6D6</color>
+    <color name="lightOrange">#A3FF9800</color>
 </resources>

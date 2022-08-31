@@ -836,6 +836,12 @@ class RecViewAdapter(private val values : MutableList<MutableMap<String, String>
                 })
             }.show()
         }
+
+        if (item.containsKey("Status") && item["Status"].equals("unorderable")) {
+            holder.detailsBtn.setColorFilter(context.getColor(R.color.lightOrange))
+        } else {
+            holder.detailsBtn.setColorFilter(context.getColor(R.color.textColor))
+        }
     }
     override fun getItemCount(): Int = values.size
 
@@ -872,7 +878,7 @@ class RecViewAdapter(private val values : MutableList<MutableMap<String, String>
             val key = keys[position]
             val value = values[key]
 
-            (holder as VHItem).infoText.text = key + ": " + value
+            (holder as VHItem).infoText.text = "$key: $value"
         }
 
         class VHItem(itemView: View) : RecyclerView.ViewHolder(itemView) {

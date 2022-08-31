@@ -16,7 +16,7 @@ class DBHelper(private  val context: Context) : SQLiteOpenHelper(context, DB_NAM
         val ACCF_ALL_CLOTHING_TABLES = arrayOf("accf_accessory", "accf_shirt")
         val ACCF_ALL_HOUSEWARES_TABLES = arrayOf("accf_furniture", "accf_carpet", "accf_wallpaper", "accf_gyroid", "accf_painting")
         val ACNL_ALL_CLOTHING_TABLES = arrayOf("acnl_accessory", "acnl_bottom", "acnl_dress", "acnl_feet", "acnl_hat", "acnl_shirt", "acnl_wet_suit")
-        val ACNL_ALL_HOUSEWARES_TABLES = arrayOf("acnl_furniture", "acnl_carpet", "acnl_wallpaper", "acnl_gyroid")
+        val ACNL_ALL_HOUSEWARES_TABLES = arrayOf("acnl_furniture", "acnl_carpet", "acnl_wallpaper", "acnl_gyroid", "acnl_song")
         val ACNH_ALL_CLOTHING_TABLES = arrayOf("acnh_accessory", "acnh_bag", "acnh_bottom", "acnh_dress", "acnh_headwear", "acnh_shoe", "acnh_sock", "acnh_top", "acnh_other_clothing")
         val ACNH_ALL_HOUSING_TABLES = arrayOf("acnh_houseware", "acnh_misc", "acnh_ceiling", "acnh_interior", "acnh_wall_mounted", "acnh_art", "acnh_flooring", "acnh_rug", "acnh_wallpaper")
         val ACNH_VARIATIONS_HELPER2 = arrayOf("acnh_houseware", "acnh_misc", "acnh_wall_mounted")
