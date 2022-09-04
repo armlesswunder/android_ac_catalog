@@ -7,6 +7,10 @@ Play Store: https://play.google.com/store/apps/details?id=com.abw4v.accatalog
 
 # News
 
+This app is no longer supported! Use the newer (cross-platform) version here:
+
+https://github.com/armlesswunder/accFlutter/releases
+
 1/12/22: Update 2.0 is now live. All items in new horizons are up to date. Variations which Cyrus may customize have been removed, thus, the old save states are no longer valid. Please ensure you create new backups ASAP.
 
 Please consider donating to me https://gofund.me/e6fc7138
