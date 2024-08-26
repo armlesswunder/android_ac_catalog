@@ -1,3 +1,5 @@
+## This app is no longer supported! Use the newer (cross-platform) version here: https://github.com/armlesswunder/accFlutter/releases
+
 # Animal Crossing Catalog for Android
 Android version of Animal Crossing Catalog
 
@@ -5,23 +7,11 @@ Contact: abw4v.dev@gmail.com
 
 Play Store: https://play.google.com/store/apps/details?id=com.abw4v.accatalog
 
-# News
-
-## 9/4/2022: This app is no longer supported! Use the newer (cross-platform) version here: https://github.com/armlesswunder/accFlutter/releases
-
-1/12/22: Update 2.0 is now live. All items in new horizons are up to date. Variations which Cyrus may customize have been removed, thus, the old save states are no longer valid. Please ensure you create new backups ASAP.
-
-Please consider donating to me https://gofund.me/e6fc7138
-
-All of the content I have made is free, but if you wish to show your appreciation for my content, this is perhaps the best way to do it!
-
-7/28/21: I've added an apk here (under releases) so that users may bypass the app store. 
-
 # Credits
 Special thanks to Nintendo, Liquify (For all games catalog reference, except ACNH), http://moridb.com/(ACNL Welcome Amiibo items reference), and everyone who contributed to the data sheet available at Nookazon (For ACNH reference) for making all this possible!
 
 # Want to use the app on desktop?
-Please checkout bluestacks.com and download the app on the emulator.
+The new version mentioned above is available on windows as well as android!
 
 # Guide
 
